@@ -1,14 +1,53 @@
+html {
+    background-color: whitesmoke;
+}
+
+/* Define keyframes at the root level */
+@keyframes spin {
+    from {
+        transform: rotateY(0deg);
+    }
+    to {
+        transform: rotateY(360deg);
+    }
+}
+
+.navigation-container {
+    border: 1px solid red;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.navigation-container-icon img {
+    width: 40px;
+}
+
+.navigation-container-icon img.rotate {
+    animation: spin 4s linear infinite;
+}
+
+.navigation-container-links {
+    border: 1px solid blue;
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 30px;
+}
+
 h1 {
-    color:red;
+    color: red;
 }
 
 .img {
     margin: 0 auto;
     border: 1px solid red;
     text-align: center;
-    img {
-        width: 40rem;
-        border-radius: 100px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    }
+}
+
+.img img {
+    width: 40rem;
+    border-radius: 100px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
 }
