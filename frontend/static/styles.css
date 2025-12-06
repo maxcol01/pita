@@ -8,6 +8,7 @@
 html {
     background-color: whitesmoke;
     font-family: Roboto, sans-serif;
+    margin: 0;
 }
 
 /* Define keyframes at the root level */
@@ -76,20 +77,29 @@ h1 {
     border: 1px solid red;
     text-align: center;
     margin-top: 30vh;
+    @media screen and (max-width: 834px) {
+        margin-top: 20vh;
+    }
 }
 
 /* LOGIN PAGE*/
 .login-main-container {
+    border: 1px solid red;
+    margin-top: 20vh;
+    @media screen and (max-width: 480px) {
+        margin-top: 0;
+    }
+    @media screen and (max-width: 834px) {
+        margin-top: 10vh;
+    }
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    border: 1px solid black;
     padding: 20px;
     h2 {
         color: var(--second-color);
     }
     .login-existing-user {
-        border: 1px dashed black;
         width: 45%;
         padding: 15px;
         form {
@@ -125,7 +135,6 @@ h1 {
         }
     }
     .login-registering-user {
-        border: 1px dashed black;
         width: 45%;
         padding: 15px;
         form {
