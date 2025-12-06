@@ -119,6 +119,10 @@ h1 {
                     border-radius: 2rem;
                     border: 0.5px solid var(--main-color);
                     text-decoration: none;
+                    padding-left: 10px;
+                    &:focus {
+                        outline: none;
+                    }
                 }
             }
             button {
@@ -154,6 +158,10 @@ h1 {
                     border-radius: 2rem;
                     border: 0.5px solid var(--main-color);
                     text-decoration: none;
+                    padding-left: 10px;
+                    &:focus {
+                        outline: none;
+                    }
                 }
             }
             button {
@@ -246,6 +254,10 @@ h1 {
 
                     input {
                         height: 2rem; /* Larger touch targets for mobile */
+                        padding-left: 10px;
+                        &:focus {
+                        outline: none;
+                        }
                     }
                 }
 
