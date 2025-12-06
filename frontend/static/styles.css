@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&family=Mea+Culpa&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 :root {
     --main-color: #ed9234;
+    --second-color: #624724;
 }
 
 html {
@@ -81,6 +82,9 @@ h1 {
     display: flex;
     justify-content: space-around;
     border: 1px solid black;
+    h2 {
+        color: var(--second-color);
+    }
     .login-existing-user {
         border: 1px dashed black;
         width: 45%;

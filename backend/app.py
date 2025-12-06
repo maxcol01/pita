@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect
 
 app = Flask(__name__,
             static_folder="../frontend/static",
@@ -18,6 +18,11 @@ def discover():
 def login():
     return render_template("login.html")
 
+
+@app.route("/register")
+def register():
+
+    return redirect(render_template("home.html"))
 
 @app.route("/contact")
 def contact():
