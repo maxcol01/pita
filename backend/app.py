@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect
+from flask import Flask, render_template, redirect, request, url_for
 
 app = Flask(__name__,
             static_folder="../frontend/static",
@@ -14,9 +14,12 @@ def discover():
     return render_template("discover.html")
 
 
-@app.route("/login")
+@app.route("/login", methods=["GET","POST"])
 def login():
-    return render_template("login.html")
+    if request.method == "POST":
+        return redirect(url_for("home"))
+    else:
+        return render_template("login.html")
 
 
 @app.route("/register")
