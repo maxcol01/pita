@@ -2,10 +2,56 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    <main class="main-content-container">
-        <h1> Hello PITA</h1>
-        <div class="img">
-            <img src="./static/welcome_img.png"/>
-        </div>
+    <main class="home-container">
+        <section class="hero-section">
+            <h1>Welcome to P.I.T.A</h1>
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h2>Your Smart Kitchen Companion</h2>
+                    <p>Manage your pantry and fridge inventory, reduce food waste, and discover delicious recipes with what you already have.</p>
+                    <div class="hero-cta">
+                        <a href="/login" class="cta-button">Get Started</a>
+                        <a href="/discover" class="secondary-button">Learn More</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="./static/welcome_img.png" alt="P.I.T.A - Pantry Inventory Tracking Application"/>
+                </div>
+            </div>
+        </section>
+
+        <section class="features-section">
+            <h2>Why Choose P.I.T.A?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📦</div>
+                    <h3>Smart Inventory</h3>
+                    <p>Keep track of all your food items in one place with expiration date monitoring and automatic reminders.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🍳</div>
+                    <h3>Recipe Suggestions</h3>
+                    <p>Get personalized recipe ideas based on what's already in your pantry and fridge.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛒</div>
+                    <h3>Shopping Lists</h3>
+                    <p>Generate smart shopping lists based on your meal plans or low inventory items.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Waste Reduction</h3>
+                    <p>Reduce food waste by keeping track of what you have and using ingredients before they expire.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="cta-content">
+                <h2>Ready to Transform Your Kitchen Experience?</h2>
+                <p>Join thousands of users who have simplified their kitchen management and reduced food waste with P.I.T.A.</p>
+                <a href="/login" class="cta-button">Create Your Account</a>
+            </div>
+        </section>
     </main>
 {% endblock %}
