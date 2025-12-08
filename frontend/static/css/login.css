@@ -25,6 +25,7 @@
                 width: 100%;
                 label {
                     font-size: 1.1rem;
+
                 }
                 input {
                     width: 100%;
@@ -116,12 +117,19 @@
             padding: 15px;
 
             form {
+                .register-username label,
+                .register-email label {
+                    font-size: 2px;
+                }
+
                 button {
                     width: auto;
                 }
+
             }
         }
     }
+
 }
 
 /* Mobile Styles (max-width: 480px) */
