@@ -1,0 +1,42 @@
+/* CONTACT PAGE */
+.contact-container {
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 20px;
+    border: 1px solid red;
+}
+
+.contact-section {
+    margin-top: 2vh;
+
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        color: var(--second-color);
+        font-size: 2.5rem;
+    }
+}
+
+/* Media Queries for Responsive Design */
+
+/* Tablet Styles (max-width: 768px) */
+@media screen and (max-width: 768px) {
+    .contact-section {
+        h1 {
+            font-size: 2rem;
+        }
+    }
+}
+
+/* Mobile Styles (max-width: 480px) */
+@media screen and (max-width: 480px) {
+    .contact-container {
+        padding: 10px;
+    }
+
+    .contact-section {
+        h1 {
+            font-size: 1.8rem;
+        }
+    }
+}

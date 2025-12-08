@@ -1,8 +1,8 @@
 from flask import Flask, render_template, redirect, request, url_for
 
 app = Flask(__name__,
-            static_folder="../frontend/static",
-            template_folder="../frontend/templates")
+            static_folder="../frontend/static/",
+            template_folder="../frontend/templates/")
 
 @app.route("/")
 def home():
