@@ -11,6 +11,13 @@ html {
     margin: 0;
 }
 
+body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    min-width: 100vw;
+}
+
 /* Define keyframes at the root level */
 @keyframes spin {
     from {

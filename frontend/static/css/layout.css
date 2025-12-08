@@ -37,8 +37,8 @@
 .footer-container {
     border: 1px solid red;
     text-align: center;
-    margin-top: 30vh;
     color: var(--main-color);
+    margin-top: auto;
 }
 
 /* Media Queries for Responsive Design */
