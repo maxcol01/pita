@@ -1,6 +1,11 @@
-/* NAVIGATION */
+/*
+* P.I.T.A - Pantry Inventory Tracking Application
+* Layout CSS - Styles for the main layout components (navigation, footer)
+*/
+
+/* ===== NAVIGATION ===== */
 .navigation-container {
-    border: 1px solid red;
+    border: 1px solid red; /* Development aid */
     padding: 20px;
     display: flex;
     justify-content: space-between;
@@ -16,32 +21,34 @@
 }
 
 .navigation-container-links {
-    border: 1px solid blue;
+    border: 1px solid blue; /* Development aid */
     width: 50%;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     gap: 30px;
-    a {
-        text-decoration: none;
-        color: var(--main-color);
-        &:hover{
-            transform: scale(1.1);
-            opacity: 0.5;
-            text-decoration: underline;
-        }
-    }
 }
 
-/* FOOTER */
+.navigation-container-links a {
+    text-decoration: none;
+    color: var(--main-color);
+}
+
+.navigation-container-links a:hover {
+    transform: scale(1.1);
+    opacity: 0.5;
+    text-decoration: underline;
+}
+
+/* ===== FOOTER ===== */
 .footer-container {
-    border: 1px solid red;
+    border: 1px solid red; /* Development aid */
     text-align: center;
     color: var(--main-color);
     margin-top: auto;
 }
 
-/* Media Queries for Responsive Design */
+/* ===== RESPONSIVE STYLES ===== */
 
 /* Tablet Styles (max-width: 768px) */
 @media screen and (max-width: 768px) {
@@ -70,10 +77,10 @@
         justify-content: center;
         flex-wrap: wrap;
         gap: 15px;
+    }
 
-        a {
-            font-size: 1.1rem;
-            padding: 5px;
-        }
+    .navigation-container-links a {
+        font-size: 1.1rem;
+        padding: 5px;
     }
 }

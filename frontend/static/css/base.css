@@ -1,10 +1,18 @@
+/*
+* P.I.T.A - Pantry Inventory Tracking Application
+* Base CSS - Core styles and variables used throughout the application
+*/
+
+/* ===== IMPORTS ===== */
 @import url('https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&family=Mea+Culpa&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
+/* ===== VARIABLES ===== */
 :root {
     --main-color: #ed9234;
     --second-color: #624724;
 }
 
+/* ===== BASE ELEMENTS ===== */
 html {
     background-color: whitesmoke;
     font-family: Roboto, sans-serif;
@@ -18,7 +26,7 @@ body {
     min-width: 100vw;
 }
 
-/* Define keyframes at the root level */
+/* ===== ANIMATIONS ===== */
 @keyframes spin {
     from {
         transform: rotateY(0deg);

@@ -1,182 +1,235 @@
-/* LOGIN PAGE*/
+/*
+* P.I.T.A - Pantry Inventory Tracking Application
+* Login CSS - Styles for the login and registration page
+*/
+
+/* ===== MAIN CONTAINER ===== */
 .login-main-container {
-    border: 1px solid red;
+    border: 1px solid red; /* Development aid */
     margin-top: 20vh;
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
     padding: 20px;
-    h2 {
-        color: var(--second-color);
-    }
-    .login-existing-user {
-        width: 45%;
-        padding: 15px;
-        background-color: white;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        form {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 40px;
-            .form-email, .form-pwd {
-                width: 100%;
-                label {
-                    font-size: 1.1rem;
-
-                }
-                input {
-                    width: 100%;
-                    height:1.5rem;
-                    border-radius: 2rem;
-                    border: 0.5px solid var(--main-color);
-                    text-decoration: none;
-                    padding-left: 10px;
-                    &:focus {
-                        outline: none;
-                    }
-                }
-            }
-            button {
-                width: auto;
-                font-size: 20px;
-                background-color: var(--main-color);
-                border-radius: 2rem;
-                border: none;
-                color: white;
-                &:hover {
-                    opacity: 0.5;
-                }
-            }
-        }
-    }
-    .login-registering-user {
-        width: 45%;
-        padding: 15px;
-        background-color: white;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        form {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 40px;
-            .register-username, .register-email, .register-password, .register-password-confirm {
-                width: 100%;
-                label {
-                    font-size: 1.1rem;
-                }
-                input {
-                    width: 100%;
-                    height:1.5rem;
-                    border-radius: 2rem;
-                    border: 0.5px solid var(--main-color);
-                    text-decoration: none;
-                    padding-left: 10px;
-                    &:focus {
-                        outline: none;
-                    }
-                }
-            }
-            button {
-                width: auto;
-                font-size: 20px;
-                background-color: var(--main-color);
-                border-radius: 2rem;
-                border: none;
-                color: white;
-                &:hover {
-                    opacity: 0.5;
-                }
-            }
-        }
-    }
 }
 
-/* Media Queries for Responsive Design */
+.login-main-container h2 {
+    color: var(--second-color);
+}
 
-/* Tablet Styles (max-width: 768px) */
+/* ===== LOGIN FORM ===== */
+.login-existing-user {
+    width: 45%;
+    padding: 15px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.login-existing-user form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+/* Form inputs */
+.form-email,
+.form-pwd {
+    width: 100%;
+}
+
+.form-email label,
+.form-pwd label {
+    font-size: 1.1rem;
+}
+
+.form-email input,
+.form-pwd input {
+    width: 100%;
+    height: 1.5rem;
+    border-radius: 2rem;
+    border: 0.5px solid var(--main-color);
+    padding-left: 10px;
+}
+
+.form-email input:focus,
+.form-pwd input:focus {
+    outline: none;
+}
+
+/* Submit button */
+.login-existing-user button {
+    width: auto;
+    font-size: 20px;
+    background-color: var(--main-color);
+    border-radius: 2rem;
+    border: none;
+    color: white;
+}
+
+.login-existing-user button:hover {
+    opacity: 0.5;
+}
+
+/* Register Box */
+.login-registering-user {
+    width: 45%;
+    padding: 15px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Register Form */
+.login-registering-user form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+/* Register input container styles */
+.register-username,
+.register-email,
+.register-password,
+.register-password-confirm {
+    width: 100%;
+}
+
+/* Register labels */
+.register-username label,
+.register-email label,
+.register-password label,
+.register-password-confirm label {
+    font-size: 1.1rem;
+}
+
+/* Register inputs */
+.register-username input,
+.register-email input,
+.register-password input,
+.register-password-confirm input {
+    width: 100%;
+    height: 1.5rem;
+    border-radius: 2rem;
+    border: 0.5px solid var(--main-color);
+    padding-left: 10px;
+}
+
+.register-username input:focus,
+.register-email input:focus,
+.register-password input:focus,
+.register-password-confirm input:focus {
+    outline: none;
+}
+
+/* Register button */
+.login-registering-user button {
+    width: auto;
+    font-size: 20px;
+    background-color: var(--main-color);
+    border-radius: 2rem;
+    border: none;
+    color: white;
+}
+
+.login-registering-user button:hover {
+    opacity: 0.5;
+}
+
+
+/*TABLET STYLES*/
+
+
 @media screen and (max-width: 768px) {
-    /* Login page tablet styles */
+
     .login-main-container {
         flex-direction: column;
         align-items: center;
         margin-top: 10vh;
-
-        h2 {
-            font-size: 20px;
-        }
-
-        .login-existing-user,
-        .login-registering-user {
-            width: 90%;
-            margin-bottom: 30px;
-            padding: 15px;
-
-            form {
-                .register-username label,
-                .register-email label {
-                    font-size: 2px;
-                }
-
-                button {
-                    width: auto;
-                }
-
-            }
-        }
     }
 
+    .login-main-container h2 {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .login-existing-user,
+    .login-registering-user {
+        width: 90%;
+        margin-bottom: 30px;
+        padding: 15px;
+    }
+
+
+    .register-username label,
+    .register-email label,
+    .register-password label,
+    .register-password-confirm label {
+        font-size: 12px;
+    }
+
+    .form-email label,
+    .form-pwd label {
+        font-size: 12px;
+    }
 }
 
-/* Mobile Styles (max-width: 480px) */
+
+/* MOBILE STYLES*/
+
+
 @media screen and (max-width: 480px) {
-    /* Login page responsive styles */
+
     .login-main-container {
         padding: 10px;
         margin-top: 0;
+    }
 
-        h2 {
-            font-size: 1.3rem;
-            text-align: center;
-        }
+    .login-main-container h2 {
+        font-size: 1.3rem;
+        text-align: center;
+    }
 
-        .login-existing-user,
-        .login-registering-user {
-            width: 100%;
-            padding: 15px;
-            margin-bottom: 20px;
+    .login-existing-user,
+    .login-registering-user {
+        width: 100%;
+        padding: 15px;
+        margin-bottom: 20px;
+    }
 
-            form {
-                gap: 20px;
+    .login-existing-user form,
+    .login-registering-user form {
+        gap: 20px;
+    }
 
-                .form-email, 
-                .form-pwd,
-                .register-username, 
-                .register-email, 
-                .register-password, 
-                .register-password-confirm {
-                    label {
-                        font-size: 1rem;
-                    }
+    /* Label size on mobile */
+    .form-email label,
+    .form-pwd label,
+    .register-username label,
+    .register-email label,
+    .register-password label,
+    .register-password-confirm label {
+        font-size: 1rem;
+    }
 
-                    input {
-                        height: 2rem; /* Larger touch targets for mobile */
-                        &:focus {
-                            outline: none;
-                        }
-                    }
-                }
+    /* Larger touch inputs on mobile */
+    .form-email input,
+    .form-pwd input,
+    .register-username input,
+    .register-email input,
+    .register-password input,
+    .register-password-confirm input {
+        height: 2rem;
+    }
 
-                button {
-                    width: auto;
-                    font-size: 18px;
-                    padding: 8px 0;
-                }
-            }
-        }
+    .login-existing-user button,
+    .login-registering-user button {
+        width: auto;
+        font-size: 18px;
+        padding: 8px 0;
     }
 }
