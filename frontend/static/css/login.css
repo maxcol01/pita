@@ -173,6 +173,12 @@
     .form-pwd label {
         font-size: 12px;
     }
+    .login-existing-user button,
+    .login-registering-user button {
+        width: 200px;
+        font-size: 18px;
+        padding: 8px 0;
+    }
 }
 
 /* Mobile Styles (max-width: 480px) */
@@ -180,6 +186,7 @@
     .login-main-container {
         padding: 10px;
         margin-top: 0;
+        max-width: 85vw;
     }
 
     .login-main-container h2 {
@@ -221,7 +228,7 @@
 
     .login-existing-user button,
     .login-registering-user button {
-        width: auto;
+        width: 100px;
         font-size: 18px;
         padding: 8px 0;
     }
