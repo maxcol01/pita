@@ -1,0 +1,25 @@
+/*
+* P.I.T.A - Pantry Inventory Tracking Application
+* Dashboard CSS - Styles for the user dashboard page
+*/
+
+/* ===== MAIN CONTAINER ===== */
+
+.dashboard-main-container {
+    height: 100vh;
+}
+
+.select-storage {
+    background-color: white;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    max-width: 80%;
+
+}
+
+.display-storage {
+    background-color: white;
+    max-width: 80%;
+    margin: 0 auto;
+    margin-top: 20px;
+}

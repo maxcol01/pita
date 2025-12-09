@@ -22,7 +22,7 @@ def discover():
 @app.route("/login", methods=["GET","POST"])
 def login():
     if request.method == "POST":
-        return redirect(url_for("home"))
+        return redirect(url_for("dashboard"))
     else:
         return render_template("login.html")
 
@@ -30,7 +30,7 @@ def login():
 @app.route("/register")
 def register():
 
-    return redirect(render_template("home.html"))
+    return redirect(render_template("dashboard.html"))
 
 @app.route("/contact", methods=["GET", "POST"])
 def contact():

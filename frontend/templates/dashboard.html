@@ -1,10 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "layout.html"%}
 
-</body>
-</html>
+{% block page_css %}
+    <link rel="stylesheet" href="./static/css/dashboard.css"/>
+{% endblock %}
+
+{% block content %}
+    <div class="dashboard-main-container">
+        <section class="select-storage">
+            <p> Select what storage you want to display</p>
+            <div class="select-storage-btns">
+                <input type="radio" name="storage" value="pantry" id="pantry" checked> Pantry
+                <input type="radio" name="storage" value="fridge" id="fridge"> Fridge
+                <input type="radio" name="storage" value="both" id="both"> Both
+            </div>
+
+        </section>
+        <section class="display-storage">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Quantity</th>
+                        <th>Unit</th>
+                        <th>Expiration date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Apple </td>
+                        <td>Fruit/vegetables </td>
+                        <td> 2 </td>
+                        <td> -  </td>
+                        <td> 30/12/26  </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+{% endblock %}
