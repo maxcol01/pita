@@ -5,7 +5,7 @@
 
 /* ===== MAIN CONTAINER ===== */
 .login-main-container {
-    border: 1px solid red; /* Development aid */
+
     margin-top: 20vh;
     display: flex;
     justify-content: space-around;
@@ -176,7 +176,7 @@
     .login-existing-user button,
     .login-registering-user button {
         width: 200px;
-        font-size: 18px;
+        font-size: 16px;
         padding: 8px 0;
     }
 }
