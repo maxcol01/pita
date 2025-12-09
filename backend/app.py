@@ -9,6 +9,11 @@ def home():
     return render_template("home.html")
 
 
+
+@app.route("/dashboard")
+def dashboard():
+    return render_template("dashboard.html")
+
 @app.route("/discover")
 def discover():
     return render_template("discover.html")
@@ -41,6 +46,8 @@ def contact():
         return redirect(url_for("home"))
     else:
         return render_template("contact.html")
+
+
 
 
 if __name__ == "__main__":
