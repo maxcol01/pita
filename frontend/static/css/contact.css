@@ -1,11 +1,17 @@
-/* CONTACT PAGE */
+/*
+* P.I.T.A - Pantry Inventory Tracking Application
+* Contact CSS - Styles for the contact page
+*/
+
+/* ===== MAIN CONTAINER ===== */
 .contact-container {
     margin: 0 auto;
     max-width: 1200px;
     padding: 20px;
-    border: 1px solid red;
+    border: 1px solid red; /* Development aid */
 }
 
+/* ===== CONTACT SECTION ===== */
 .contact-section {
     margin-top: 2vh;
 
@@ -16,21 +22,132 @@
         font-size: 2.5rem;
     }
 
+    /* ===== CONTACT FORM ===== */
     .contact-form-main-container {
         display: flex;
         flex-direction: column;
         align-items: center;
         background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        padding: 30px;
+        width: 80%;
+        max-width: 600px;
+        margin: 0 auto;
+
+        h2 {
+            color: var(--second-color);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+            width: 100%;
+        }
+
+        /* Form input containers */
+        .contact-name,
+        .contact-email,
+        .contact-subject,
+        .contact-message {
+            width: 100%;
+        }
+
+        /* Labels */
+        .contact-name label,
+        .contact-email label,
+        .contact-subject label,
+        .contact-message label {
+            font-size: 1.1rem;
+            color: var(--second-color);
+        }
+
+        /* Inputs */
+        .contact-name input,
+        .contact-email input,
+        .contact-subject input {
+            width: 100%;
+            height: 1.5rem;
+            border-radius: 2rem;
+            border: 0.5px solid var(--main-color);
+            padding-left: 10px;
+            margin-top: 5px;
+
+            &:focus {
+                outline: none;
+            }
+        }
+
+        /* Textarea */
+        .contact-message textarea {
+            width: 100%;
+            border-radius: 1rem;
+            border: 0.5px solid var(--main-color);
+            padding: 10px;
+            margin-top: 5px;
+            resize: vertical;
+
+            &:focus {
+                outline: none;
+            }
+        }
+
+        /* Submit button */
+        button {
+            width: auto;
+            font-size: 20px;
+            background-color: var(--main-color);
+            border-radius: 2rem;
+            border: none;
+            color: white;
+            padding: 8px 25px;
+            margin-top: 10px;
+            cursor: pointer;
+
+            &:hover {
+                opacity: 0.8;
+            }
+        }
     }
 }
 
-/* Media Queries for Responsive Design */
+/* ===== RESPONSIVE STYLES ===== */
 
 /* Tablet Styles (max-width: 768px) */
 @media screen and (max-width: 768px) {
     .contact-section {
         h1 {
             font-size: 2rem;
+        }
+
+        .contact-form-main-container {
+            width: 90%;
+            padding: 20px;
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            form {
+                gap: 20px;
+            }
+
+            .contact-name label,
+            .contact-email label,
+            .contact-subject label,
+            .contact-message label {
+                font-size: 1rem;
+            }
+
+            button {
+                font-size: 18px;
+                padding: 8px 20px;
+            }
         }
     }
 }
@@ -44,6 +161,37 @@
     .contact-section {
         h1 {
             font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .contact-form-main-container {
+            width: 100%;
+            padding: 15px;
+
+            h2 {
+                font-size: 1.3rem;
+                margin-bottom: 15px;
+            }
+
+            form {
+                gap: 15px;
+            }
+
+            /* Larger touch inputs on mobile */
+            .contact-name input,
+            .contact-email input,
+            .contact-subject input {
+                height: 2rem;
+            }
+
+            .contact-message textarea {
+                min-height: 100px;
+            }
+
+            button {
+                width: 100%;
+                padding: 10px 0;
+            }
         }
     }
 }

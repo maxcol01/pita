@@ -27,9 +27,20 @@ def register():
 
     return redirect(render_template("home.html"))
 
-@app.route("/contact")
+@app.route("/contact", methods=["GET", "POST"])
 def contact():
-    return render_template("contact.html")
+    if request.method == "POST":
+        # In a real application, you would process the form data here
+        # For example, send an email or store the message in a database
+        # name = request.form.get("name")
+        # email = request.form.get("email")
+        # subject = request.form.get("subject")
+        # message = request.form.get("message")
+
+        # For now, just redirect to the home page with a success parameter
+        return redirect(url_for("home"))
+    else:
+        return render_template("contact.html")
 
 
 if __name__ == "__main__":

@@ -1,11 +1,17 @@
-/* DISCOVER PAGE */
+/*
+* P.I.T.A - Pantry Inventory Tracking Application
+* Discover CSS - Styles for the discover page
+*/
+
+/* ===== MAIN CONTAINER ===== */
 .discover-container {
     margin: 0 auto;
     max-width: 1200px;
     padding: 20px;
-    border: 1px solid red;
+    border: 1px solid red; /* Development aid */
 }
 
+/* ===== DISCOVER SECTION ===== */
 .discover-section {
     margin-top: 2vh;
 
@@ -92,7 +98,7 @@
     }
 }
 
-/* Media Queries for Responsive Design */
+/* ===== RESPONSIVE STYLES ===== */
 
 /* Tablet Styles (max-width: 768px) */
 @media screen and (max-width: 768px) {

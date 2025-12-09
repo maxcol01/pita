@@ -73,7 +73,7 @@
     opacity: 0.5;
 }
 
-/* Register Box */
+/* ===== REGISTRATION FORM ===== */
 .login-registering-user {
     width: 45%;
     padding: 15px;
@@ -82,7 +82,6 @@
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-/* Register Form */
 .login-registering-user form {
     display: flex;
     flex-direction: column;
@@ -141,11 +140,10 @@
 }
 
 
-/*TABLET STYLES*/
+/* ===== RESPONSIVE STYLES ===== */
 
-
+/* Tablet Styles (max-width: 768px) */
 @media screen and (max-width: 768px) {
-
     .login-main-container {
         flex-direction: column;
         align-items: center;
@@ -164,7 +162,6 @@
         padding: 15px;
     }
 
-
     .register-username label,
     .register-email label,
     .register-password label,
@@ -178,12 +175,8 @@
     }
 }
 
-
-/* MOBILE STYLES*/
-
-
+/* Mobile Styles (max-width: 480px) */
 @media screen and (max-width: 480px) {
-
     .login-main-container {
         padding: 10px;
         margin-top: 0;
