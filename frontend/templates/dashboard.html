@@ -4,6 +4,9 @@
     <link rel="stylesheet" href="./static/css/dashboard.css"/>
 {% endblock %}
 
+{% block hello %}
+    <div class="welcoming-user-container">Hello !</div>
+{% endblock %}
 {% block content %}
     <div class="dashboard-main-container">
         <section class="select-storage">
@@ -24,6 +27,7 @@
                         <th>Quantity</th>
                         <th>Unit</th>
                         <th>Expiration date</th>
+                        <th> Action (edit/delete)</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,6 +37,10 @@
                         <td> 2 </td>
                         <td> -  </td>
                         <td> 30/12/26  </td>
+                        <td>
+                            <button>d</button>
+                            <button>e</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
