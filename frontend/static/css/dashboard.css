@@ -23,3 +23,19 @@
     margin: 0 auto;
     margin-top: 20px;
 }
+
+/* ===== ADD ITEM BTN ===== */
+
+.add-item-btn-container {
+    display: flex;
+    justify-content: center;
+    border: 1px solid red;
+}
+
+.add-item-btn-container .add-item-btn {
+        background-color: white;
+        border-radius: 8px;
+        width: 10%;
+    text-align: center;
+    border: 1px solid var(--main-color);
+}

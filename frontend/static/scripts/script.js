@@ -7,6 +7,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+
+    // dynamically show the item card container
+
     // get the current date to dynamically apply it to the page
     const date = new Date();
     const dateSpan = document.getElementById("date");
