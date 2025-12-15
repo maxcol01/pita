@@ -40,10 +40,32 @@ def login():
         return render_template("login.html")
 
 
-@app.route("/register")
+@app.route("/register", methods = ["POST","GET"])
 def register():
+    # check for the response type (POST/GET)
+    if request.method == "POST":
+        username = request.form.get("username",None)
+        email = request.form.get("reg-email", None)
+        password = request.form.get("reg-pwd", None)
+        password_check = request.form.get("reg-pwd-cf", None)
+        # check if the user entered a name
+        if username:
+            print(f"ok: {request.form.get("name")}")
 
-    return redirect(render_template("dashboard.html"))
+        # check if the user entered a valid email
+        if email:
+            print(f"ok:{email}")
+        # check if the user entered a proper password
+        if password:
+            print(f"ok: {password}")
+        # check if the user repeated the password correctly
+        if password_check:
+            print(f"ok: {password_check}")
+        if username and email and password and (password_check == password):
+            return redirect(url_for("dashboard"))
+    else:
+        return redirect(url_for("login"))
+
 
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
