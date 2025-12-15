@@ -1,4 +1,9 @@
 import sqlite3
-from  CS50 import SQL
+from  cs50 import SQL
+import os
 
-db = SQL()
+
+
+
+# create the db object
+db = SQL(f"sqlite:///{path_to_db}")

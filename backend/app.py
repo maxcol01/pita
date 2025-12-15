@@ -1,4 +1,17 @@
 from flask import Flask, render_template, redirect, request, url_for
+import sqlite3
+from  cs50 import SQL
+import os
+from dotenv import load_dotenv
+
+# check if the .env files exists
+load_dotenv()
+
+# create the path to the db
+path_to_db = os.getenv("PATH_TO_DB")
+
+# create the db object
+db = SQL(f"sqlite:///{path_to_db}")
 
 app = Flask(__name__,
             static_folder="../frontend/static/",
