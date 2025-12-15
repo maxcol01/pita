@@ -3,6 +3,7 @@ import sqlite3
 from  cs50 import SQL
 import os
 from dotenv import load_dotenv
+from flask_session import Session
 
 # check if the .env files exists
 load_dotenv()
@@ -13,9 +14,15 @@ path_to_db = os.getenv("PATH_TO_DB")
 # create the db object
 db = SQL(f"sqlite:///{path_to_db}")
 
+
+# Create the app
 app = Flask(__name__,
             static_folder="../frontend/static/",
             template_folder="../frontend/templates/")
+
+
+# Create the handling of the session
+Session(app)
 
 @app.route("/")
 def home():
