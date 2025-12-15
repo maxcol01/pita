@@ -50,7 +50,7 @@ def register():
         password_check = request.form.get("reg-pwd-cf", None)
         # check if the user entered a name
         if username:
-            print(f"ok: {request.form.get("name")}")
+            print(f"ok: {username}")
 
         # check if the user entered a valid email
         if email:
