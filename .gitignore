@@ -71,3 +71,8 @@ yarn-error.log*
 # Backup files
 *.bak
 *.tmp
+
+# db
+
+*.db
+*.sqlite
