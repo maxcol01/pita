@@ -6,8 +6,6 @@ from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 
 
-
-
 # check if the .env files exists
 load_dotenv()
 
@@ -68,23 +66,26 @@ def register():
         password_check = request.form.get("reg-pwd-cf", None)
         # check if the user entered a name
         if username:
+            # TODO: check that a user is correct
             print(f"ok: {username}")
 
         # check if the user entered a valid email
         if email:
+            # TODO: check if the email as a proper format
             print(f"ok:{email}")
         # check if the user entered a proper password
         if password:
+            # TODO: check if the password as a proper format
             print(f"ok: {password}")
         # check if the user repeated the password correctly
-        if password_check:
-            print(f"ok: {password_check}")
-            password_hashed = generate_password_hash(password)
-        if username and email and password and (password_check == password):
-            print("we can login")
-            db.execute("INSERT INTO users (name, email, password_hashed) VALUES (?,?,?)", username, email,
-                       password_hashed)
-            return redirect(url_for("dashboard"))
+        if not password_check:
+            # TODO: use a function to display a message
+            return redirect(url_for("login"))
+        password_hashed = generate_password_hash(password)
+
+        db.execute("INSERT INTO users (name, email, password_hashed) VALUES (?,?,?)", username, email,
+                   password_hashed)
+        return redirect(url_for("dashboard"))
     else:
         return redirect(url_for("login"))
 
