@@ -78,7 +78,10 @@ def register():
         # check if the user repeated the password correctly
         if password_check:
             print(f"ok: {password_check}")
+            password_hashed = generate_password_hash(password)
         if username and email and password and (password_check == password):
+            print("we can login")
+
             return redirect(url_for("dashboard"))
     else:
         return redirect(url_for("login"))
