@@ -4,6 +4,7 @@ import os
 from dotenv import load_dotenv
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
+import re
 
 
 # check if the .env files exists
@@ -65,9 +66,9 @@ def register():
         password = request.form.get("reg-pwd", None)
         password_check = request.form.get("reg-pwd-cf", None)
         # check if the user entered a name
-        if username:
-            # TODO: check that a user is correct
-            print(f"ok: {username}")
+        if not username:
+            # TODO: return a message of error if the user does not enter a user name
+            return "error"
 
         # check if the user entered a valid email
         if email:
