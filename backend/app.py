@@ -1,5 +1,4 @@
 from flask import Flask, render_template, redirect, request, url_for
-import sqlite3
 from  cs50 import SQL
 import os
 from dotenv import load_dotenv
