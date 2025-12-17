@@ -4,6 +4,9 @@ from  cs50 import SQL
 import os
 from dotenv import load_dotenv
 from flask_session import Session
+from werkzeug.security import check_password_hash, generate_password_hash
+
+
 
 
 # check if the .env files exists
