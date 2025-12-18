@@ -52,6 +52,10 @@ def discover():
 @app.route("/login", methods=["GET","POST"])
 def login():
     if request.method == "POST":
+        email = request.form.get("email", None)
+        password = request.form.get("password", None)
+        # check if the email is in the db:
+        stored_email = db.execute("SELECT email, password_hashed in users WHERE id = ?", session["id"])
         return redirect(url_for("dashboard"))
     else:
         return render_template("login.html")
@@ -86,6 +90,9 @@ def register():
 
         db.execute("INSERT INTO users (name, email, password_hashed) VALUES (?,?,?)", username, email,
                    password_hashed)
+        # store the user id
+        user_id = db.execute("SELECT id in users WHERE name = ?", username)
+        session["user_id"] = user_id
         return redirect(url_for("dashboard"))
     else:
         return redirect(url_for("login"))
