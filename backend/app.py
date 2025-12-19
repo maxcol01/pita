@@ -76,7 +76,7 @@ def register():
 
         # check if the user entered a valid email
         if email:
-            # TODO: check if the email as a proper format
+            # TODO: check if the email as a proper format and also if the email is already there (in this case error out)
             print(f"ok:{email}")
         # check if the user entered a proper password
         if password:
