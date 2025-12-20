@@ -4,7 +4,6 @@ import os
 from dotenv import load_dotenv
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
-import re
 
 
 # check if the .env files exists
@@ -33,6 +32,11 @@ app.config["SESSION_COOKIE_SAMESITE"] = "Lax" # prevent CSRF
 
 Session(app)
 
+# Create the additional layer of protection using the header
+@app.after_request
+def header_definition(response):
+    pass
+
 # Create the routes
 @app.route("/")
 def home():
@@ -55,7 +59,7 @@ def login():
         email = request.form.get("email", None)
         password = request.form.get("password", None)
         # check if the email is in the db:
-        stored_email = db.execute("SELECT email, password_hashed in users WHERE id = ?", session["user_id"])
+        #stored_email = db.execute("SELECT email, password_hashed in users WHERE id = ?", session["user_id"])
         return redirect(url_for("dashboard"))
     else:
         return render_template("login.html")
@@ -92,7 +96,8 @@ def register():
                    password_hashed)
         # store the user id
         user_id = db.execute("SELECT id FROM users WHERE name = ?", username)
-        session["user_id"] = user_id
+        print(user_id)
+        #session["user_id"] = user_id
         return redirect(url_for("dashboard"))
     else:
         return redirect(url_for("login"))
