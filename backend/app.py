@@ -4,7 +4,7 @@ import os
 from dotenv import load_dotenv
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
-
+from flask_wtf.csrf import CSRFProtect
 
 # check if the .env files exists
 load_dotenv()
@@ -32,10 +32,20 @@ app.config["SESSION_COOKIE_SAMESITE"] = "Lax" # prevent CSRF
 
 Session(app)
 
+# Protection against CSRF
+
+csrf = CSRFProtect(app)
+
 # Create the additional layer of protection using the header
 @app.after_request
-def header_definition(response):
-    pass
+def header_security_definition(response):
+    response.headers["Content-Security-Policy"] = (
+        "default-src 'self'; script-src 'self'; object-src 'none'; base-uri 'self'"
+    )
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+    return response
 
 # Create the routes
 @app.route("/")
