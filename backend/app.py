@@ -12,6 +12,7 @@ load_dotenv()
 # Get required env. variables
 path_to_db = os.getenv("PATH_TO_DB") # path to db
 SECRET_KEY = os.getenv("SESSION_SK") # secret key for session id
+AI_API_KEY = os.getenv("OPEN_AI_KEY")
 
 # create the db object
 db = SQL(f"sqlite:///{path_to_db}")
@@ -112,6 +113,10 @@ def register():
     else:
         return redirect(url_for("login"))
 
+
+@app.route("/my-assistant")
+def ai_assistant():
+    pass
 
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
