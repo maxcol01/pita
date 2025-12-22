@@ -17,8 +17,15 @@
         <div class="navigation-container-links">
             <a href="/">Home</a>
             <a href="/discover">Discover</a>
-            <a href="/login">Login</a>
+            {% if session.get("user_id") %}
+                <a href="/logout" id="logout-btn-nav"> Logout </a>
+            {% else %}
+                <a href="/login" id="login-btn-nav">Login</a>
+            {% endif %}
             <a href="/contact">Contact</a>
+            {% if session.get("user_id") %}
+                <a href="/my-assistant">Generate recipes</a>
+            {% endif %}
         </div>
     </nav>
     <!-- Main content-->

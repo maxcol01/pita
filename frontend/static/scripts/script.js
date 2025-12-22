@@ -1,11 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     // Dashboard display options
-
     const btn = document.getElementsByClassName("select-storage-btns")
     console.log(btn)
-
-
 
 
     // dynamically show the item card container

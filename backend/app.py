@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, request, url_for
+from flask import Flask, render_template, redirect, request, url_for, session
 from  cs50 import SQL
 import os
 from dotenv import load_dotenv
@@ -35,7 +35,7 @@ Session(app)
 
 # Protection against CSRF
 
-csrf = CSRFProtect(app)
+#csrf = CSRFProtect(app)
 
 # Create the additional layer of protection using the header
 @app.after_request
@@ -48,7 +48,7 @@ def header_security_definition(response):
     response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
     return response
 
-# Create the routes
+### Create the routes ###
 @app.route("/")
 def home():
     return render_template("home.html")
@@ -57,7 +57,10 @@ def home():
 
 @app.route("/dashboard")
 def dashboard():
-    return render_template("dashboard.html")
+    # Check if user is logged in
+    if not session.get("user_id"):
+        return redirect(url_for("login"))
+    return render_template("dashboard.html", name=session["name"])
 
 @app.route("/discover")
 def discover():
@@ -67,11 +70,30 @@ def discover():
 @app.route("/login", methods=["GET","POST"])
 def login():
     if request.method == "POST":
+        # Get form data
         email = request.form.get("email", None)
         password = request.form.get("password", None)
-        # check if the email is in the db:
-        #stored_email = db.execute("SELECT email, password_hashed in users WHERE id = ?", session["user_id"])
-        return redirect(url_for("dashboard"))
+
+        # Basic validation
+        if not email:
+            return render_template("login.html", error="Email is required")
+
+        if not password:
+            return render_template("login.html", error="Password is required")
+
+        # Check if the email exists in the database
+        user = db.execute("SELECT * FROM users WHERE email = ?", email)
+
+        # If no user found or password is incorrect
+        if not user or not check_password_hash(user[0]["password_hashed"], password):
+            return render_template("login.html", error="Invalid email or password")
+
+        # Extract relevant information: Set up the session + name of the user
+        session["user_id"] = user[0]["id"]
+        session["name"] = user[0]["name"]
+        #print(session["name"])
+        # Redirect to dashboard
+        return redirect(url_for("dashboard", name=session["name"]))
     else:
         return render_template("login.html")
 
@@ -79,44 +101,73 @@ def login():
 @app.route("/register", methods = ["POST","GET"])
 def register():
     # check for the response type (POST/GET)
+    # TODO: add flask flashes for the error messages.
     if request.method == "POST":
         username = request.form.get("username",None)
         email = request.form.get("reg-email", None)
         password = request.form.get("reg-pwd", None)
         password_check = request.form.get("reg-pwd-cf", None)
-        # check if the user entered a name
-        if not username:
-            # TODO: return a message of error if the user does not enter a user name
-            return "error"
 
-        # check if the user entered a valid email
-        if email:
-            # TODO: check if the email as a proper format and also if the email is already there (in this case error out)
-            print(f"ok:{email}")
-        # check if the user entered a proper password
-        if password:
-            # TODO: check if the password as a proper format
-            print(f"ok: {password}")
-        # check if the user repeated the password correctly
-        if not password_check:
-            # TODO: use a function to display a message
-            return redirect(url_for("login"))
+        # Check if the user entered a name
+        if not username:
+            return render_template("login.html", error="Username is required")
+
+        # Check if the user entered a valid email
+        if not email:
+            return render_template("login.html", error="Email is required")
+
+        # Check if email already exists
+        existing_user = db.execute("SELECT * FROM users WHERE email = ?", email)
+        if existing_user:
+            return render_template("login.html", error="Email already registered")
+
+        # Check if the user entered a password
+        if not password:
+            return render_template("login.html", error="Password is required")
+
+        # Check if password is at least 6 characters
+        if len(password) < 6:
+            return render_template("login.html", error="Password must be at least 6 characters")
+
+        # Check if the passwords match
+        if password != password_check:
+            return render_template("login.html", error="Passwords do not match")
+
+        # Hash the password
         password_hashed = generate_password_hash(password)
 
-        db.execute("INSERT INTO users (name, email, password_hashed) VALUES (?,?,?)", username, email,
-                   password_hashed)
-        # store the user id
-        user_id = db.execute("SELECT id FROM users WHERE name = ?", username)
-        print(user_id)
-        #session["user_id"] = user_id
-        return redirect(url_for("dashboard"))
+        # Insert the new user into the database
+        db.execute("INSERT INTO users (name, email, password_hashed) VALUES (?,?,?)", 
+                  username, email, password_hashed)
+
+        # Get the user ID and store it in the session + name of user for welcoming message.
+        response = db.execute("SELECT name, id FROM users WHERE email = ?", email)
+        session["user_id"] = response[0]["id"]
+        session["name"] = response[0]["name"]
+        # Redirect to dashboard
+        return redirect(url_for("dashboard", name=session["name"]))
     else:
         return redirect(url_for("login"))
 
 
+@app.route("/edit-item")
+def edit_item():
+    pass
+
+@app.route("/delete-item")
+def delete_item():
+    pass
+
 @app.route("/my-assistant")
 def ai_assistant():
-    pass
+    return render_template("assistant.html")
+
+@app.route("/logout")
+def logout():
+    # Clear the session
+    session.clear()
+    # Redirect to home page
+    return redirect(url_for("home"))
 
 @app.route("/contact", methods=["GET", "POST"])
 def contact():

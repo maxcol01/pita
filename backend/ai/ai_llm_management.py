@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 from openai import OpenAI
 
 
-load_dotenv()
+load_dotenv(dotenv_path="../.env")
 
 AI_API_KEY = os.getenv("OPEN_AI_KEY")
 
@@ -24,4 +24,4 @@ response = client.chat.completions.create(
     ]
 )
 
-print(response)
+print(response.choices[0].message.content)
