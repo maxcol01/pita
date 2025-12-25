@@ -7,7 +7,9 @@
 {% block hello %}
     <div class="welcoming-user-container">Hello {{session["name"]}}</div>
 {% endblock %}
+
 {% block content %}
+    <div class="dashboard-title"> My items:</div>
     <div class="dashboard-main-container">
         <section class="display-storage">
             <table>
@@ -26,13 +28,13 @@
                     <tr>
                         <td>Apple </td>
                         <td>Fruit/vegetables </td>
-                        <td> Fridge </td> <!-- either fridge or pantry-->
+                        <td> Fridge </td> <!-- either fridge, freezer or pantry-->
                         <td> 2 </td>
                         <td> -  </td>
                         <td> 30/12/26  </td>
                         <td>
-                            <button>delete</button>
-                            <button>edit</button>
+                            <form action="/delete-item" method="get"><button type="submit">delete</button></form>
+                            <form action="/edit-item" method="get"><button type="submit">edit</button></form>
                         </td>
                     </tr>
                 </tbody>
@@ -40,7 +42,7 @@
         </section>
         <div class="add-item-btn-container">
             <div class="add-item-btn">
-                add item
+                <button type="submit">add element</button>
             </div>
         </div>
         <section class="item-card-container" hidden>
