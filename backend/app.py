@@ -105,7 +105,6 @@ def login():
 @app.route("/register", methods = ["POST","GET"])
 def register():
     # check for the response type (POST/GET)
-    # TODO: add flask flashes for the error messages.
     if request.method == "POST":
         username = request.form.get("username",None)
         email = request.form.get("reg-email", None)
@@ -114,29 +113,32 @@ def register():
 
         # Check if the user entered a name
         if not username:
-            return render_template("login.html", error="Username is required")
+            flash(message="Username is required", category="error")
+            return redirect(url_for("login.html"))
 
         # Check if the user entered a valid email
         if not email:
-            return render_template("login.html", error="Email is required")
+            flash(message="Email is required")
+            return redirect(url_for("login.html"))
 
         # Check if email already exists
         existing_user = db.execute("SELECT * FROM users WHERE email = ?", email)
         if existing_user:
-            return render_template("login.html", error="Email already registered")
+            flash(message="Email already registered", category="error")
+            return redirect(url_for("login.html"))
 
         # Check if the user entered a password
         if not password:
-            return render_template("login.html", error="Password is required")
-
+            flash(message="Password is required", category="error")
+            return redirect(url_for("login.html"))
         # Check if password is at least 6 characters
         if len(password) < 6:
-            return render_template("login.html", error="Password must be at least 6 characters")
-
+            flash(message="Password must be at least 6 characters", category="error")
+            return redirect(url_for("login.html"))
         # Check if the passwords match
         if password != password_check:
-            return render_template("login.html", error="Passwords do not match")
-
+            flash(message="Passwords do not match", category="error")
+            return redirect(url_for("login.html"))
         # Hash the password
         password_hashed = generate_password_hash(password)
 
@@ -149,7 +151,8 @@ def register():
         session["user_id"] = response[0]["id"]
         session["name"] = response[0]["name"]
         # Redirect to dashboard
-        return redirect(url_for("dashboard", name=session["name"]))
+        flash(message=f"Welcome {session["name"]}", category= "success")
+        return redirect(url_for("dashboard"))
     else:
         return redirect(url_for("login"))
 
