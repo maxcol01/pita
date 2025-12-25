@@ -3,6 +3,25 @@
 * Login CSS - Styles for the login and registration page
 */
 
+/* ===== FLASH MESSAGE ===== */
+.flash-message {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.flash-message.error {
+  background-color: #ffe5e5;
+  color: #a40000;
+}
+
+.flash-message.success {
+  background-color: #e5ffe5;
+  color: #006400;
+}
+
+
+
 /* ===== MAIN CONTAINER ===== */
 .login-main-container {
 

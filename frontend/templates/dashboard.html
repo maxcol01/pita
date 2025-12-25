@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block hello %}
-    <div class="welcoming-user-container">Hello {{name}}</div>
+    <div class="welcoming-user-container">Hello {{session["name"]}}</div>
 {% endblock %}
 {% block content %}
     <div class="dashboard-main-container">

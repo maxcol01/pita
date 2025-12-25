@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, request, url_for, session
+from flask import Flask, render_template, redirect, request, url_for, session, flash
 from  cs50 import SQL
 import os
 from dotenv import load_dotenv
@@ -76,24 +76,28 @@ def login():
 
         # Basic validation
         if not email:
-            return render_template("login.html", error="Email is required")
+            flash(message="Email is required", category="error")
+            return redirect(url_for("login"))
 
         if not password:
-            return render_template("login.html", error="Password is required")
+            flash(message="Password is required", category="error")
+            return redirect(url_for("login"))
 
         # Check if the email exists in the database
         user = db.execute("SELECT * FROM users WHERE email = ?", email)
 
         # If no user found or password is incorrect
         if not user or not check_password_hash(user[0]["password_hashed"], password):
-            return render_template("login.html", error="Invalid email or password")
+            flash(message="Invalid email or password", category="error")
+            return redirect(url_for("login"))
 
         # Extract relevant information: Set up the session + name of the user
         session["user_id"] = user[0]["id"]
         session["name"] = user[0]["name"]
         #print(session["name"])
         # Redirect to dashboard
-        return redirect(url_for("dashboard", name=session["name"]))
+        flash(message=f"Welcome {session["name"]}", category="success")
+        return redirect(url_for("dashboard"))
     else:
         return render_template("login.html")
 
