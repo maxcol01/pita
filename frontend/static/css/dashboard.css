@@ -5,74 +5,185 @@
 
 /* ===== WELCOME CONTAINER ===== */
 .welcoming-user-container {
-    border: 1px solid red;
-    font-size: 30px;
-    margin-bottom: 20px;
+    font-size: 2rem;
+    margin: 20px 0;
     color: var(--second-color);
+    text-align: center;
+    font-weight: bold;
 }
 
 /* ===== TITLE CONTAINER ===== */
 .dashboard-title {
     text-align: center;
-    font-size: 30px;
+    font-size: 1.8rem;
+    color: var(--main-color);
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--main-color);
+    padding-bottom: 10px;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
 }
+
 /* ===== MAIN CONTAINER ===== */
-
 .dashboard-main-container {
-    height: 100vh;
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 20px;
 }
-
 
 .display-storage {
     background-color: white;
-    max-width: 80%;
+    max-width: 100%;
     border-radius: 10px;
-    padding: 10px;
-    margin-top: 20px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
+    padding: 20px;
+    margin: 0 auto 30px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    overflow-x: auto;
 }
 
 table {
     text-align: center;
-    border: 1px solid red;
-    width: 99%;
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
 }
 
-tr > th{
+th {
     background-color: var(--main-color);
+    color: white;
+    padding: 12px 15px;
+    font-weight: bold;
+}
+
+td {
+    padding: 10px 15px;
+    border-bottom: 1px solid #ddd;
 }
 
 tr {
-    background-color: var(--second-color);
+    background-color: white;
 }
 
-tr:nth-child(odd){
-    background-color: bisque;
+tr:nth-child(even) {
+    background-color: #f9f9f9;
 }
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
 /* ===== ADD ITEM BTN ===== */
-
 .add-item-btn-container {
     display: flex;
     justify-content: center;
-    border: 1px solid red;
+    margin: 20px 0;
 }
 
-.add-item-btn-container .add-item-btn {
-    background-color: white;
-    border-radius: 8px;
-    width: 10%;
+.add-item-btn {
     text-align: center;
-    border: 1px solid var(--main-color);
 }
 
-/* ===== EDIT/DELETER ITEM BTN ===== */
+.add-item-btn button {
+    background-color: var(--main-color);
+    color: white;
+    border: none;
+    border-radius: 2rem;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
 
+.add-item-btn button:hover {
+    opacity: 0.8;
+}
+
+/* ===== EDIT/DELETE ITEM BTN ===== */
 .items-btns-action {
-    height: 90%;
     display: flex;
     justify-content: center;
-    border: 1px solid red;
     align-items: center;
+    gap: 10px;
+}
+
+.items-btns-action button {
+    background-color: var(--main-color);
+    color: white;
+    border: none;
+    border-radius: 2rem;
+    padding: 5px 15px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+.items-btns-action button:hover {
+    opacity: 0.8;
+}
+
+.items-btns-action form:first-child button {
+    background-color: #d9534f; /* Red for delete button */
+}
+
+/* ===== RESPONSIVE STYLES ===== */
+@media screen and (max-width: 768px) {
+    .welcoming-user-container {
+        font-size: 1.5rem;
+    }
+
+    .dashboard-title {
+        font-size: 1.5rem;
+    }
+
+    .display-storage {
+        padding: 15px;
+    }
+
+    th, td {
+        padding: 8px 10px;
+    }
+
+    .add-item-btn button {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .welcoming-user-container {
+        font-size: 1.3rem;
+    }
+
+    .dashboard-title {
+        font-size: 1.3rem;
+        max-width: 95%;
+    }
+
+    .dashboard-main-container {
+        padding: 10px;
+    }
+
+    .display-storage {
+        padding: 10px;
+        max-width: 100%;
+    }
+
+    table {
+        font-size: 0.9rem;
+    }
+
+    th, td {
+        padding: 6px 8px;
+    }
+
+    .items-btns-action {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .items-btns-action button {
+        width: 70px;
+        font-size: 0.8rem;
+        padding: 4px 8px;
+    }
 }

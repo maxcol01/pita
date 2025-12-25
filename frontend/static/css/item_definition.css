@@ -1,0 +1,125 @@
+/*
+* P.I.T.A - Pantry Inventory Tracking Application
+* Item Definition CSS - Styles for the item add/edit page
+*/
+
+/* ===== TITLE CONTAINER ===== */
+.item-title {
+    text-align: center;
+    font-size: 1.8rem;
+    color: var(--main-color);
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--main-color);
+    padding-bottom: 10px;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ===== FORM CONTAINER ===== */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.item-definition-main-container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 30px;
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 20px;
+}
+
+/* ===== FORM ELEMENTS ===== */
+label {
+    font-size: 1.1rem;
+    color: var(--second-color);
+    margin-bottom: 5px;
+    display: block;
+}
+
+input, select {
+    width: 100%;
+    height: 2.5rem;
+    border-radius: 2rem;
+    border: 1px solid var(--main-color);
+    padding: 0 15px;
+    margin-bottom: 20px;
+    font-size: 1rem;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border: 2px solid var(--main-color);
+}
+
+/* ===== SUBMIT BUTTON ===== */
+button[type="submit"] {
+    background-color: var(--main-color);
+    color: white;
+    border: none;
+    border-radius: 2rem;
+    padding: 10px 30px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: opacity 0.3s;
+    margin-top: 10px;
+}
+
+button[type="submit"]:hover {
+    opacity: 0.8;
+}
+
+/* ===== RESPONSIVE STYLES ===== */
+@media screen and (max-width: 768px) {
+    .item-title {
+        font-size: 1.5rem;
+    }
+    
+    .item-definition-main-container {
+        padding: 20px;
+        max-width: 90%;
+    }
+    
+    label {
+        font-size: 1rem;
+    }
+    
+    input, select {
+        height: 2.2rem;
+    }
+    
+    button[type="submit"] {
+        font-size: 1rem;
+        padding: 8px 25px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .item-title {
+        font-size: 1.3rem;
+        max-width: 95%;
+    }
+    
+    .item-definition-main-container {
+        padding: 15px;
+        max-width: 95%;
+    }
+    
+    label {
+        font-size: 0.9rem;
+    }
+    
+    input, select {
+        height: 2rem;
+        margin-bottom: 15px;
+    }
+    
+    button[type="submit"] {
+        font-size: 0.9rem;
+        padding: 8px 20px;
+    }
+}
