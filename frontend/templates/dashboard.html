@@ -25,29 +25,31 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Apple </td>
-                        <td>Fruit/vegetables </td>
-                        <td> Fridge </td> <!-- either fridge, freezer or pantry-->
-                        <td> 2 </td>
-                        <td> -  </td>
-                        <td> 30/12/26  </td>
-                        <td>
-                            <form action="/delete-item" method="get"><button type="submit">delete</button></form>
-                            <form action="/edit-item" method="get"><button type="submit">edit</button></form>
-                        </td>
-                    </tr>
+                    {% for item in user_items%}
+                        <tr>
+                            <td>{{item.name}} </td>
+                            <td>{{item.category}}</td>
+                            <td> {{item.location}} </td> <!-- either fridge, freezer or pantry-->
+                            <td> {{item.quantity}} </td>
+                            <td> {{item.unit}} </td>
+                            <td> {{item.expiration_date}}</td>
+                            <td>
+                                <div class="items-btns-action">
+                                    <form action="/delete-item" method="get"><button type="submit">delete</button></form>
+                                    <form action="/edit-item" method="get"><button type="submit">edit</button></form>
+                                </div>
+
+                            </td>
+                        </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </section>
         <div class="add-item-btn-container">
             <div class="add-item-btn">
-                <button type="submit">add element</button>
+                <form action="/add-item" method="get"><button type="submit">add element</button></form>
             </div>
         </div>
-        <section class="item-card-container" hidden>
-
-        </section>
     </div>
 {% endblock %}
 

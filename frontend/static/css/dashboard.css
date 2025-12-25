@@ -40,6 +40,17 @@ table {
     width: 99%;
 }
 
+tr > th{
+    background-color: var(--main-color);
+}
+
+tr {
+    background-color: var(--second-color);
+}
+
+tr:nth-child(odd){
+    background-color: bisque;
+}
 /* ===== ADD ITEM BTN ===== */
 
 .add-item-btn-container {
@@ -54,4 +65,14 @@ table {
         width: 10%;
     text-align: center;
     border: 1px solid var(--main-color);
+}
+
+/* ===== EDIT/DELETER ITEM BTN ===== */
+
+.items-btns-action {
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    border: 1px solid red;
+    align-items: center;
 }

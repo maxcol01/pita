@@ -37,6 +37,25 @@ Session(app)
 
 #csrf = CSRFProtect(app)
 
+
+# Categories
+
+categories = [
+    "Vegetables",
+    "Fruits",
+    "Meat & Fish",
+    "Dairy & Alternatives",
+    "Bakery & Grains",
+    "Canned & Jarred",
+    "Frozen Foods",
+    "Condiments & Sauces",
+    "Spices & Seasonings",
+    "Snacks & Sweets",
+    "Nuts, Seeds & Spreads",
+    "Beverages",
+    "Other"
+]
+
 # Create the additional layer of protection using the header
 @app.after_request
 def header_security_definition(response):
@@ -61,6 +80,7 @@ def dashboard():
     if not session.get("user_id"):
         return redirect(url_for("login"))
     user_items = db.execute("SELECT * FROM pantry_items WHERE user_id = ?", session["user_id"])
+    print(user_items)
     return render_template("dashboard.html", name=session["name"], user_items=user_items)
 
 @app.route("/discover")
@@ -160,25 +180,11 @@ def register():
 
 @app.route("/edit-item")
 def edit_item():
-    categories = [
-        "Vegetables",
-        "Fruits",
-        "Meat & Fish",
-        "Dairy & Alternatives",
-        "Bakery & Grains",
-        "Canned & Jarred",
-        "Frozen Foods",
-        "Condiments & Sauces",
-        "Spices & Seasonings",
-        "Snacks & Sweets",
-        "Nuts, Seeds & Spreads",
-        "Beverages",
-        "Other"
-    ]
+
     return render_template("item_definition.html", categories=categories)
 
 
-@app.route("/add-item", methods = ["POST"])
+@app.route("/add-item", methods = ["POST", "GET"])
 def add_item():
     if request.method == "POST":
         item_name = request.form.get("name")
@@ -189,7 +195,9 @@ def add_item():
         item_location = request.form.get("location")
 
         db.execute("INSERT INTO pantry_items (user_id, name, category, quantity, unit, expiration_date, location) VALUES (?, ?, ?, ?, ?, ?, ?)", session["user_id"], item_name, item_category, item_quantity, item_unit, item_exp_date, item_location)
-    return redirect(url_for("dashboard"))
+        return redirect(url_for("dashboard"))
+    else:
+        return render_template("item_definition.html", categories=categories)
 
 @app.route("/delete-item")
 def delete_item():
