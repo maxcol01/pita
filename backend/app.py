@@ -159,6 +159,26 @@ def register():
 
 @app.route("/edit-item")
 def edit_item():
+    categories = [
+        "Vegetables",
+        "Fruits",
+        "Meat & Fish",
+        "Dairy & Alternatives",
+        "Bakery & Grains",
+        "Canned & Jarred",
+        "Frozen Foods",
+        "Condiments & Sauces",
+        "Spices & Seasonings",
+        "Snacks & Sweets",
+        "Nuts, Seeds & Spreads",
+        "Beverages",
+        "Other"
+    ]
+    return render_template("item_definition.html", categories=categories)
+
+
+@app.route("/add-item")
+def add_item():
     pass
 
 @app.route("/delete-item")

@@ -1,8 +1,41 @@
 {% extends "layout.html" %}
 
-{% ccs block %}{% endblock %}
+{% block page_css %}{% endblock %}
 
 {% block content %}
 
+    <div class="item-title"> Manage your items</div>
+    <form action="/add-item" method="post">
+        <div class="item-definition-main-container">
+            <!--Name-->
+            <label for="name">Item name:</label><br>
+            <input type="text" id="name" name="name"><br>
+            <!--Category-->
+            <label for="category">Select Category:</label><br>
+            <select id="category" name="category">
+                {% for category in categories %}
+                    <option value="{{category}}">{{category}}</option>
+                {% endfor %}
+            </select><br>
+            <!--Quantity-->
+            <label for="quantity">Quantity:</label><br>
+            <input type="number" id="quantity" name="quantity"><br>
+            <!--Unit-->
+            <label for="unit">Units:</label><br>
+            <input type="text" id="unit" name="unit"><br>
+            <!--Exp. date-->
+            <label for="exp-date">Expiration date:</label><br>
+            <input type="date" id="exp-date" name="exp-date"><br>
+            <!--Location-->
+            <label for="location">Location:</label><br>
+            <select name="location" id="location"><br>
+                <option value="Fridge">Fridge</option>
+                <option value="Pantry">Pantry</option>
+                <option value="Freezer">Freezer</option>
+            </select>
+
+        </div>
+        <button type="submit">Add item</button>
+    </form>
 
 {% endblock %}
