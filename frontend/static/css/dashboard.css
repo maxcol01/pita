@@ -123,7 +123,7 @@ tr:hover {
 }
 
 .items-btns-action form:first-child button {
-    background-color: #d9534f; /* Red for delete button */
+    background-color: #d9534f; /* delete button */
 }
 
 /* ===== RESPONSIVE STYLES ===== */
