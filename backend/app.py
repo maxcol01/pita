@@ -187,7 +187,7 @@ def edit_item(item_id):
         item_unit = request.form.get("unit")
         item_exp_date = request.form.get("exp-date")
         item_location = request.form.get("location")
-        today = datetime.date.today()
+        today = datetime.datetime.now()
 
         db.execute("UPDATE pantry_items SET name = ?, category = ?, quantity = ?, unit = ?, expiration_date = ?, location = ?, updated_at = ? WHERE item_id = ? AND user_id = ?", item_name, item_category, item_quantity, item_unit, item_exp_date, item_location, today, item_id, session["user_id"])
         return redirect(url_for("dashboard"))
