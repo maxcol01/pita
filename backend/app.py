@@ -177,9 +177,18 @@ def edit_item():
     return render_template("item_definition.html", categories=categories)
 
 
-@app.route("/add-item")
+@app.route("/add-item", methods = ["POST"])
 def add_item():
-    pass
+    if request.method == "POST":
+        item_name = request.form.get("name")
+        item_category = request.form.get("category")
+        item_quantity = request.form.get("quantity")
+        item_unit = request.form.get("unit")
+        item_exp_date = request.form.get("exp-date")
+        item_location = request.form.get("location")
+
+        db.execute("INSERT INTO pantry_items (user_id, name, category, quantity, unit, expiration_date, location) VALUES (?, ?, ?, ?, ?, ?, ?)", session["user_id"], item_name, item_category, item_quantity, item_unit, item_exp_date, item_location)
+    return redirect(url_for("dashboard"))
 
 @app.route("/delete-item")
 def delete_item():
