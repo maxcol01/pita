@@ -60,7 +60,8 @@ def dashboard():
     # Check if user is logged in
     if not session.get("user_id"):
         return redirect(url_for("login"))
-    return render_template("dashboard.html", name=session["name"])
+    user_items = db.execute("SELECT * FROM pantry_items WHERE user_id = ?", session["user_id"])
+    return render_template("dashboard.html", name=session["name"], user_items=user_items)
 
 @app.route("/discover")
 def discover():
