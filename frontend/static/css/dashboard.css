@@ -60,9 +60,9 @@ tr:nth-child(odd){
 }
 
 .add-item-btn-container .add-item-btn {
-        background-color: white;
-        border-radius: 8px;
-        width: 10%;
+    background-color: white;
+    border-radius: 8px;
+    width: 10%;
     text-align: center;
     border: 1px solid var(--main-color);
 }

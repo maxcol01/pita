@@ -199,10 +199,10 @@ def add_item():
     else:
         return render_template("item_definition.html", categories=categories)
 
-@app.route("/delete-item")
-def delete_item():
-    pass
-
+@app.route("/delete-item/<int:item_id>")
+def delete_item(item_id):
+    db.execute("DELETE FROM pantry_items WHERE item_id = ? AND user_id = ?", item_id, session["user_id"])
+    return redirect(url_for("dashboard"))
 @app.route("/my-assistant")
 def ai_assistant():
     return render_template("assistant.html")

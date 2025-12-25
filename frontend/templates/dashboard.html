@@ -35,8 +35,8 @@
                             <td> {{item.expiration_date}}</td>
                             <td>
                                 <div class="items-btns-action">
-                                    <form action="/delete-item" method="get"><button type="submit">delete</button></form>
-                                    <form action="/edit-item" method="get"><button type="submit">edit</button></form>
+                                    <form action="/delete-item/{{item.item_id}}" method="get"><button type="submit">delete</button></form>
+                                    <form action="/edit-item/{{item.item_id}}" method="get"><button type="submit">edit</button></form>
                                 </div>
 
                             </td>
