@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_wtf.csrf import CSRFProtect
-
+import datetime
 # check if the .env files exists
 load_dotenv()
 
@@ -178,10 +178,22 @@ def register():
         return redirect(url_for("login"))
 
 
-@app.route("/edit-item")
-def edit_item():
+@app.route("/edit-item/<int:item_id>", methods=["GET","POST"])
+def edit_item(item_id):
+    if request.method == "POST":
+        item_name = request.form.get("name")
+        item_category = request.form.get("category")
+        item_quantity = request.form.get("quantity")
+        item_unit = request.form.get("unit")
+        item_exp_date = request.form.get("exp-date")
+        item_location = request.form.get("location")
+        today = datetime.date.today()
 
-    return render_template("item_definition.html", categories=categories)
+        db.execute("UPDATE pantry_items SET name = ?, category = ?, quantity = ?, unit = ?, expiration_date = ?, location = ?, updated_at = ? WHERE item_id = ? AND user_id = ?", item_name, item_category, item_quantity, item_unit, item_exp_date, item_location, today, item_id, session["user_id"])
+        return redirect(url_for("dashboard"))
+    else:
+        items_info = db.execute("SELECT * FROM pantry_items WHERE item_id = ? AND user_id = ?", item_id, session["user_id"])
+        return render_template("item_definition.html", categories=categories, items_info = items_info)
 
 
 @app.route("/add-item", methods = ["POST", "GET"])
@@ -197,7 +209,7 @@ def add_item():
         db.execute("INSERT INTO pantry_items (user_id, name, category, quantity, unit, expiration_date, location) VALUES (?, ?, ?, ?, ?, ?, ?)", session["user_id"], item_name, item_category, item_quantity, item_unit, item_exp_date, item_location)
         return redirect(url_for("dashboard"))
     else:
-        return render_template("item_definition.html", categories=categories)
+        return render_template("item_definition.html", categories=categories, items_info = [])
 
 @app.route("/delete-item/<int:item_id>")
 def delete_item(item_id):
