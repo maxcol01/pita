@@ -1,0 +1,10 @@
+.ai-assistant-select-btn {
+    border: 1px solid red;
+    text-align: center;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.ai-assistant-select-btn a {
+    margin: 20px;
+}

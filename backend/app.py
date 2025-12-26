@@ -11,6 +11,7 @@ import datetime
 # ===== IMPORT FROM APP MODULES =====
 
 from mail.mail_management import send_contact_email
+from ai.ai_llm_management import generate_response
 # check if the .env files exists
 load_dotenv()
 
@@ -223,6 +224,18 @@ def delete_item(item_id):
 @app.route("/my-assistant")
 def ai_assistant():
     return render_template("assistant.html")
+
+
+@app.route("/my-assistant/generate")
+def generate_recipes():
+    response = generate_response()
+    return render_template("assistant.html", response=response)
+
+
+@app.route("/my-assistant/recipes")
+def read_recipes():
+
+    pass
 
 @app.route("/logout")
 def logout():
