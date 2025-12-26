@@ -19,13 +19,11 @@ def send_contact_email(user_name, user_email, subject, message_content):
     message["Subject"] = f"[Contact] {subject}"
 
     body = f"""
-    New contact message:
+    New message from user:
     
     Name: {user_name}
     Email: {user_email}
-    
-    Message:
-    {message_content}
+    Message:{message_content}
     """
     message.attach(MIMEText(body, "plain"))
 

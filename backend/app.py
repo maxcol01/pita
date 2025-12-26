@@ -1,3 +1,4 @@
+# ===== IMPORT THE MODULES =====
 from flask import Flask, render_template, redirect, request, url_for, session, flash
 from  cs50 import SQL
 import os
@@ -6,6 +7,10 @@ from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_wtf.csrf import CSRFProtect
 import datetime
+
+# ===== IMPORT FROM APP MODULES =====
+
+from mail.mail_management import send_contact_email
 # check if the .env files exists
 load_dotenv()
 
@@ -229,9 +234,13 @@ def logout():
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
     if request.method == "POST":
-
-        # For now, just redirect to the home page with a success parameter
-        return redirect(url_for("home"))
+        user_name = request.form.get("name")
+        user_email = request.form.get("email")
+        subject = request.form.get("subject")
+        message_content = request.form.get("message")
+        send_contact_email(user_name, user_email, subject, message_content)
+        # redirect to the dashboard page with a success parameter
+        return redirect(url_for("dashboard"))
     else:
         return render_template("contact.html")
 
