@@ -4,7 +4,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from dotenv import load_dotenv
 
-load_dotenv("../.env")
+load_dotenv()
 
 SENDER_EMAIL = os.getenv("EMAIL_SENDER")
 PASSWORD = os.getenv("EMAIL_PASSWORD")
@@ -17,7 +17,6 @@ def send_contact_email(user_name, user_email, subject, message_content):
     message["To"] = SENDER_EMAIL  # here the sender and the recipient are the same
     message["Reply-To"] = user_email
     message["Subject"] = f"[Contact] {subject}"
-
     body = f"""
     New message from user:
     
