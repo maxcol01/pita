@@ -4,7 +4,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv("../.env")
 
 SENDER_EMAIL = os.getenv("EMAIL_SENDER")
 PASSWORD = os.getenv("EMAIL_PASSWORD")
@@ -14,7 +14,7 @@ SMTP_PORT = 587
 def send_contact_email(user_name, user_email, subject, message_content):
     message = MIMEMultipart()
     message["From"] = SENDER_EMAIL
-    message["To"] = SENDER_EMAIL  # you receive the message
+    message["To"] = SENDER_EMAIL  # here the sender and the recipient are the same
     message["Reply-To"] = user_email
     message["Subject"] = f"[Contact] {subject}"
 
@@ -27,9 +27,9 @@ def send_contact_email(user_name, user_email, subject, message_content):
     Message:
     {message_content}
     """
-        message.attach(MIMEText(body, "plain"))
+    message.attach(MIMEText(body, "plain"))
 
-        with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
-            server.starttls()
-            server.login(SENDER_EMAIL, PASSWORD)
-            server.send_message(message)
+    with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
+        server.starttls()
+        server.login(SENDER_EMAIL, PASSWORD)
+        server.send_message(message)
