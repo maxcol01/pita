@@ -6,27 +6,30 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-SENDER_EMAIL = os.getenv("SENDER_EMAIL")
-PASSWORD = os.getenv("PASSWORD2")
-SUBJECT = f"Contact from {email} concerning {subject}"
-SERVER = "smtp.gmail.com"
-FILE = "email_list.txt"
+SENDER_EMAIL = os.getenv("EMAIL_SENDER")
+PASSWORD = os.getenv("EMAIL_PASSWORD")
+SMTP_SERVER = "smtp.gmail.com"
+SMTP_PORT = 587
 
-message = MIMEMultipart()
+def send_contact_email(user_name, user_email, subject, message_content):
+    message = MIMEMultipart()
+    message["From"] = SENDER_EMAIL
+    message["To"] = SENDER_EMAIL  # you receive the message
+    message["Reply-To"] = user_email
+    message["Subject"] = f"[Contact] {subject}"
 
-message["From"] = SENDER_EMAIL
-message["Subject"] = SUBJECT
+    body = f"""
+    New contact message:
+    
+    Name: {user_name}
+    Email: {user_email}
+    
+    Message:
+    {message_content}
+    """
+        message.attach(MIMEText(body, "plain"))
 
-BODY = f"{message_content}"
-
-
-message.attach(MIMEText(BODY, "plain"))
-message_string = message.as_string()
-
-message["To"] = f"{email_contact}"
-
-
-with smtplib.SMTP(SERVER) as connection:
-    connection.starttls()
-    connection.login(user=SENDER_EMAIL,password=PASSWORD)
-    connection.sendmail(from_addr=SENDER_EMAIL, to_addrs=email_contact, msg=message_string)
+        with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
+            server.starttls()
+            server.login(SENDER_EMAIL, PASSWORD)
+            server.send_message(message)

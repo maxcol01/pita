@@ -67,7 +67,7 @@ def header_security_definition(response):
     response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
     return response
 
-### Create the routes ###
+### ===== Create the routes ======= ###
 @app.route("/")
 def home():
     return render_template("home.html")
