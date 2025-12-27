@@ -1,86 +1,88 @@
 {% extends "layout.html"%}
 
 {% block page_css %}
-    <link rel="stylesheet" href="../static/css/assistant.css">
+    <link rel="stylesheet" href="/static/css/assistant.css">
 {% endblock %}
 
 {% block content %}
-    <h1> Welcome to your smart assistant {{session["name"]}}!</h1>
-    <p> In here, you can receives help to generate recipes when you lack inspiration. The goal is to use as much as possible what you have in your pantry in order to reduce waste and consume food in a smart and economical way. </p>
-    <p> If you need more ingredients, the recipes will be enriched with the former and these will be highlighted so you can know exactly what you need to buy.</p>
+    <div class="assistant-container">
+        <h1> Welcome to your smart assistant {{session["name"]}}!</h1>
+        <p> In here, you can receives help to generate recipes when you lack inspiration. The goal is to use as much as possible what you have in your pantry in order to reduce waste and consume food in a smart and economical way. </p>
+        <p> If you need more ingredients, the recipes will be enriched with the former and these will be highlighted so you can know exactly what you need to buy.</p>
 
-    <p> If you were pleased with the recipes, you can save it for later as well.</p>
+        <p> If you were pleased with the recipes, you can save it for later as well.</p>
 
-    <p> Go to <a href="/my-recipies"> this link</a> to access your previously saved delicious recipies.</p>
-    <!-- Button to go and read the db using the ai to generate and display new recipes-->
-    <div class="ai-assistant-select-btn">
-        <a href="/my-assistant/generate" id="gen-rec-btn"> Generate recipes</a>
-    </div>
-    <!-- "Spinner" (pulse) div while the response is waited-->
-    <div class="ai-spinner"  id="spinner" hidden>
-        <h2> Generating recipe ... </h2>
-        <i class="fa-solid fa-plate-wheat"></i>
-    </div>
-    <!-- Display this once we get the data from the API -->
-    {% if recipe %}
-        <div class="ai-response-main-container">
-            <div class="ai-response-formatted-container">
-                  <!-- Title -->
-                    <h1 class="ai-recipe-title">
-                        {{recipe["title"]}}
-                    </h1>
-                    <p class="ai-recipe-description">
-                      {{recipe["description"]}}
-                    </p>
-                  <!-- General information -->
-                  <section class="ai-recipe-information">
-                    <ul>
-                      <li><strong>Servings:</strong> {{recipe["servings"]}}</li>
-                      <li><strong>Calories:</strong> {{recipe["calories"]}} kcal</li>
-                      <li>
-                        <strong>Time:</strong>
-                        Prep {{recipe["time"]["prep_minutes"]}} min - Cook {{recipe["time"]["cook_minutes"]}} min - Total {{recipe["time"]["total_minutes"]}} min
-                      </li>
-                    </ul>
-                  </section>
-                  <!-- Ingredients -->
-                  <section class="ai-recipe-ingredients">
-                    <h2>Ingredients</h2>
-                      {% for ingredient in recipe["ingredients_used"]%}
+        <p> Go to <a href="/my-recipies"> this link</a> to access your previously saved delicious recipies.</p>
+        <!-- Button to go and read the db using the ai to generate and display new recipes-->
+        <div class="ai-assistant-select-btn">
+            <a href="/my-assistant/generate" id="gen-rec-btn"> Generate recipes</a>
+        </div>
+        <!-- "Spinner" (pulse) div while the response is waited-->
+        <div class="ai-spinner"  id="spinner" hidden>
+            <h2> Generating recipe ... </h2>
+            <i class="fa-solid fa-plate-wheat"></i>
+        </div>
+        <!-- Display this once we get the data from the API -->
+        {% if recipe %}
+            <div class="ai-response-main-container">
+                <div class="ai-response-formatted-container">
+                      <!-- Title -->
+                        <h1 class="ai-recipe-title">
+                            {{recipe["title"]}}
+                        </h1>
+                        <p class="ai-recipe-description">
+                          {{recipe["description"]}}
+                        </p>
+                      <!-- General information -->
+                      <section class="ai-recipe-information">
                         <ul>
-                          <li>{{ingredient["quantity"]}} {{ingredient["name"]}}</li>
+                          <li><strong>Servings:</strong> {{recipe["servings"]}}</li>
+                          <li><strong>Calories:</strong> {{recipe["calories"]}} kcal</li>
+                          <li>
+                            <strong>Time:</strong>
+                            Prep {{recipe["time"]["prep_minutes"]}} min - Cook {{recipe["time"]["cook_minutes"]}} min - Total {{recipe["time"]["total_minutes"]}} min
+                          </li>
                         </ul>
-                      {% endfor %}
-                  </section>
-                  <!-- Ingredients to buy -->
-                  <section class="ai-recipe-ingredients-to-buy">
-                    <h2>Ingredients to Buy</h2>
-                      {% if recipe["ingredients_to_buy"] %}
-                          {% for ingredient in recipe["ingredients_to_buy"]%}
+                      </section>
+                      <!-- Ingredients -->
+                      <section class="ai-recipe-ingredients">
+                        <h2>Ingredients</h2>
+                          {% for ingredient in recipe["ingredients_used"]%}
                             <ul>
                               <li>{{ingredient["quantity"]}} {{ingredient["name"]}}</li>
                             </ul>
                           {% endfor %}
-                      {% else %}
-                        <h4> You already have everything you need !</h4>
-                      {% endif%}
-                  </section>
+                      </section>
+                      <!-- Ingredients to buy -->
+                      <section class="ai-recipe-ingredients-to-buy">
+                        <h2>Ingredients to Buy</h2>
+                          {% if recipe["ingredients_to_buy"] %}
+                              {% for ingredient in recipe["ingredients_to_buy"]%}
+                                <ul>
+                                  <li>{{ingredient["quantity"]}} {{ingredient["name"]}}</li>
+                                </ul>
+                              {% endfor %}
+                          {% else %}
+                            <h4> You already have everything you need !</h4>
+                          {% endif%}
+                      </section>
 
-                  <!-- Steps -->
-                  <section class="ai-recipe-steps">
-                    <h2>Instructions</h2>
-                    <ol>
-                        {% for instruction in recipe["steps"] %}
-                            <li>
-                                {{instruction}}
-                            </li>
-                        {% endfor %}
-                    </ol>
-                  </section>
+                      <!-- Steps -->
+                      <section class="ai-recipe-steps">
+                        <h2>Instructions</h2>
+                        <ol>
+                            {% for instruction in recipe["steps"] %}
+                                <li>
+                                    {{instruction}}
+                                </li>
+                            {% endfor %}
+                        </ol>
+                      </section>
+                </div>
+                <div class="ai-save-recipe-btn">
+                    <a href="/save-recipe">Save recipe</a>
+                </div>
             </div>
-            <div class="ai-save-recipe-btn">
-                <a href="/save-recipe">Save recipe</a>
-            </div>
-        </div>
-    {% endif %}
+        {% endif %}
+    </div>
 {% endblock %}
