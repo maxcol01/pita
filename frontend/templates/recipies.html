@@ -5,5 +5,20 @@
 {% endblock %}
 
 {% block content%}
-  <h1> This is the recipies page</h1>
+  <h1> This is your recipes {{session["name"]}} ! Enjoy !</h1>
+  <p> Select your previous recipes from the drop down menu below. If you want to remove a recipe from your history please feel free to do so.</p>
+  <div class="user-recipies-history">
+    <label for="recipe">Select the recipe you want to try again</label><br><br>
+    <select id="recipe" name="recipe">
+      {% for recipe in recipes %}
+        <option id="selected-recipe-hist"  value="{{recipe['id']}}">{{recipe["name"]}}</option>
+      {% endfor%}
+    </select>
+
+    <div class="delete-recipe-btn">
+      <form action="/delete-recipe" method="post"><button type="submit">Delete recipe</button></form>
+    </div>
+  </div>
+
+
 {% endblock %}
