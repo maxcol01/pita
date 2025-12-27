@@ -1,5 +1,5 @@
 # ===== IMPORT THE MODULES =====
-from flask import Flask, render_template, redirect, request, url_for, session, flash
+from flask import Flask, render_template, redirect, request, url_for, session, flash, jsonify
 from  cs50 import SQL
 import os
 from dotenv import load_dotenv
@@ -7,11 +7,12 @@ from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_wtf.csrf import CSRFProtect
 import datetime
+import json
 
 # ===== IMPORT FROM APP MODULES =====
 
 from mail.mail_management import send_contact_email
-from ai.ai_llm_management import generate_response
+from ai.ai_llm_management import generate_response, format_ingredients_for_prompt
 # check if the .env files exists
 load_dotenv()
 
@@ -221,16 +222,33 @@ def add_item():
 def delete_item(item_id):
     db.execute("DELETE FROM pantry_items WHERE item_id = ? AND user_id = ?", item_id, session["user_id"])
     return redirect(url_for("dashboard"))
-@app.route("/my-assistant")
+@app.route("/my-assistant", methods = ["GET", "POST"])
 def ai_assistant():
-    return render_template("assistant.html")
+    if request.method == "POST":
+        pass
+    else:
+        return render_template("assistant.html")
 
 
 @app.route("/my-assistant/generate")
 def generate_recipes():
-    response = generate_response()
+
+    #Extract the ingredients of the user from the db
     ingredients = db.execute("SELECT * FROM pantry_items WHERE user_id = ?", session["user_id"])
-    return render_template("assistant.html", response=response, ingredients = ingredients)
+
+    # format the ingredients for LLM friendly input
+    formated_ingredients = format_ingredients_for_prompt(ingredients)
+
+    #get the response from the API
+    raw_response = generate_response(formated_ingredients)
+    response_dict = json.loads(raw_response)
+    response_json = json.dumps(response_dict)
+    #store the json format to the db
+    db.execute("INSERT INTO recipes (user_id, name, recipe_json) VALUES (?, ?, ?)", session["user_id"], response_dict["title"], response_json)
+
+    #send a status for the frontend (JS)
+    response_status = jsonify({"status":"success"})
+    return response_status
 
 
 @app.route("/my-assistant/recipes")

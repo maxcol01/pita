@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-    <h1> Welcome to you AI assistant {{session["name"]}}!</h1>
+    <h1> Welcome to your smart assistant {{session["name"]}}!</h1>
     <p> In here, you can receives help to generate recipes when you lack inspiration. The goal is to use as much as possible what you have in your pantry in order to reduce waste and consume food in a smart and economical way. </p>
     <p> If you need more ingredients, the recipes will be enriched with the former and these will be highlighted so you can know exactly what you need to buy.</p>
 
@@ -14,7 +14,7 @@
     <!-- Select menu to get previous recipes-->
     <!-- Button to go and read the db using the ai to generate and display new recipes-->
     <div class="ai-assistant-select-btn">
-        <a href="/my-assistant/generate"> Generate recipes</a>
+        <a href="/my-assistant/generate" id="gen-rec-btn"> Generate recipes</a>
         <a href="/my-assistant/recipes"> Select previous recipes</a>
     </div>
     <div>
