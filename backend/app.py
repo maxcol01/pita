@@ -65,7 +65,6 @@ categories = [
 
 # Create the additional layer of protection using the header
 @app.after_request
-
 def header_security_definition(response):
     response.headers["Content-Security-Policy"] = (
         "default-src 'self'; "
@@ -230,12 +229,11 @@ def add_item():
 def delete_item(item_id):
     db.execute("DELETE FROM pantry_items WHERE item_id = ? AND user_id = ?", item_id, session["user_id"])
     return redirect(url_for("dashboard"))
+
 @app.route("/my-assistant", methods = ["GET", "POST"])
 def ai_assistant():
-    if request.method == "POST":
-        pass
-    else:
-        return render_template("assistant.html")
+    recipe = session.get("recipe", None)
+    return render_template("assistant.html", recipe = recipe)
 
 
 @app.route("/my-assistant/generate")
@@ -250,15 +248,34 @@ def generate_recipes():
     #get the response from the API
     raw_response = generate_response(formated_ingredients)
     response_dict = json.loads(raw_response)# python dict
-    response_json = json.dumps(response_dict) # back to text format
 
-    #store the json format to the db
-    db.execute("INSERT INTO recipes (user_id, name, recipe_json) VALUES (?, ?, ?)", session["user_id"], response_dict["title"], response_json)
+    #store the json format to the session (only a single recipe)
+    session["recipe"] = response_dict
 
     #send a status for the frontend (JS)
     response_status = jsonify({"status":"success"})
     return response_status
 
+
+@app.route("/save-recipe")
+def save_recipe():
+    # get the recipe from the session
+    recipe = session.get("recipe", None)
+
+    # check if there is a recipe
+    if not recipe:
+        return jsonify({"error": "No recipe to save"}), 400
+
+    # convert the dict to a string
+    response_json = json.dumps(recipe)
+
+    # save into db
+    db.execute("INSERT INTO recipes (user_id, name, recipe_json) VALUES (?, ?, ?)", session["user_id"], recipe["title"], response_json)
+
+    # remove from session
+    session.pop("recipe", None)
+
+    return redirect(url_for("read_recipes"))
 
 @app.route("/my-recipies")
 def read_recipes():
