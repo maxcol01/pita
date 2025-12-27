@@ -229,7 +229,8 @@ def ai_assistant():
 @app.route("/my-assistant/generate")
 def generate_recipes():
     response = generate_response()
-    return render_template("assistant.html", response=response)
+    ingredients = db.execute("SELECT * FROM pantry_items WHERE user_id = ?", session["user_id"])
+    return render_template("assistant.html", response=response, ingredients = ingredients)
 
 
 @app.route("/my-assistant/recipes")
