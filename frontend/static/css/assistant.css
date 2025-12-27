@@ -64,13 +64,11 @@ p a:hover {
 
 /* ===== SPINNER ===== */
 .ai-spinner {
-    height: 100%;
-    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 40px 0;
+    margin: 20px 0;
 }
 
 .ai-spinner h2 {
