@@ -8,3 +8,37 @@
 .ai-assistant-select-btn a {
     margin: 20px;
 }
+
+.ai-spinner {
+    height: 100%;
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.ai-spinner h2 {
+    color: var(--main-color);
+}
+.ai-spinner > .fa-plate-wheat {
+    font-size: 200px;
+    animation: pulse 1.5s infinite ease-in-out;
+
+}
+
+
+[hidden] {
+  display: none !important;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        color: var(--main-color);;
+    }
+    50% {
+        color: wheat;
+    }
+}
+
+

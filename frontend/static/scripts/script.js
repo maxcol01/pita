@@ -2,11 +2,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // check if I get a response (for the loader)
     const generateRcpBtn = document.getElementById("gen-rec-btn");
+    const spinner = document.getElementById("spinner");
+
     generateRcpBtn.addEventListener("click", async (event) => {
         event.preventDefault();
+        spinner.hidden = false;
         const result = await fetch("/my-assistant/generate");
         const data = await result.json()
-        console.log(data)
+        // redirect to the assistant page
+        if (data){
+            window.location.href = "/my-assistant"
+            spinner.hidden = true;
+        }
     })
 
     // get the current date to dynamically apply it to the page

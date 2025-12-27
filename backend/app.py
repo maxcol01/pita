@@ -65,14 +65,22 @@ categories = [
 
 # Create the additional layer of protection using the header
 @app.after_request
+
 def header_security_definition(response):
     response.headers["Content-Security-Policy"] = (
-        "default-src 'self'; script-src 'self'; object-src 'none'; base-uri 'self'"
+        "default-src 'self'; "
+        "script-src 'self'; "
+        "style-src 'self' https://cdnjs.cloudflare.com https://fonts.googleapis.com; "
+        "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; "
+        "img-src 'self' data:; "
+        "object-src 'none'; "
+        "base-uri 'self';"
     )
     response.headers["X-Content-Type-Options"] = "nosniff"
     response.headers["X-Frame-Options"] = "DENY"
     response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
     return response
+
 
 ### ===== Create the routes ======= ###
 @app.route("/")
@@ -241,8 +249,9 @@ def generate_recipes():
 
     #get the response from the API
     raw_response = generate_response(formated_ingredients)
-    response_dict = json.loads(raw_response)
-    response_json = json.dumps(response_dict)
+    response_dict = json.loads(raw_response)# python dict
+    response_json = json.dumps(response_dict) # back to text format
+
     #store the json format to the db
     db.execute("INSERT INTO recipes (user_id, name, recipe_json) VALUES (?, ?, ?)", session["user_id"], response_dict["title"], response_json)
 
@@ -251,10 +260,9 @@ def generate_recipes():
     return response_status
 
 
-@app.route("/my-assistant/recipes")
+@app.route("/my-recipies")
 def read_recipes():
-
-    pass
+    return render_template("recipies.html")
 
 @app.route("/logout")
 def logout():

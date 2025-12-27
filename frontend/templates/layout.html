@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="/static/css/base.css" rel="stylesheet"/>
     <link href="/static/css/layout.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" rel="stylesheet">
     {% block page_css %}{% endblock %}
     <link rel="icon" type="image/x-icon" href="/static/icon.ico"/>
     <title>P.I.T.A</title>
@@ -25,6 +26,7 @@
             <a href="/contact">Contact</a>
             {% if session.get("user_id") %}
                 <a href="/my-assistant">Generate recipes</a>
+                <a href="/my-recipies">My recipies</a>
                 <a href="/dashboard">Dashboard</a>
             {% endif %}
         </div>
