@@ -34,8 +34,7 @@ app = Flask(__name__,
             static_folder="../frontend/static/",
             template_folder="../frontend/templates/")
 
-
-# Configuration of the session
+# ===== CONFIGURATION OF THE SESSION =====
 app.config["SECRET_KEY"] = SECRET_KEY # create the stamp of the session
 app.config["SESSION_USE_SIGNER"] = True # prevent tempered cookies (ad to session cookie for server identification)
 app.config["SESSION_TYPE"] = "filesystem" # store on the server
@@ -50,7 +49,7 @@ Session(app)
 #csrf = CSRFProtect(app)
 
 
-# Categories
+# ===== CATEGORIES FOR THE ITEMS =====
 
 categories = [
     "Vegetables",
@@ -68,7 +67,7 @@ categories = [
     "Other"
 ]
 
-# Create the additional layer of protection using the header
+# ===== PROTECTION OF THE APP IN THE HEADER =====
 @app.after_request
 def header_security_definition(response):
     response.headers["Content-Security-Policy"] = (
@@ -86,11 +85,10 @@ def header_security_definition(response):
     return response
 
 
-### ===== Create the routes ======= ###
+### ===== ROUTES ======= ###
 @app.route("/")
 def home():
     return render_template("home.html")
-
 
 
 @app.route("/dashboard")
@@ -101,6 +99,7 @@ def dashboard():
     user_items = db.execute("SELECT * FROM pantry_items WHERE user_id = ?", session["user_id"])
     print(user_items)
     return render_template("dashboard.html", name=session["name"], user_items=user_items)
+
 
 @app.route("/discover")
 def discover():
@@ -230,10 +229,12 @@ def add_item():
     else:
         return render_template("item_definition.html", categories=categories, items_info = [])
 
+
 @app.route("/delete-item/<int:item_id>")
 def delete_item(item_id):
     db.execute("DELETE FROM pantry_items WHERE item_id = ? AND user_id = ?", item_id, session["user_id"])
     return redirect(url_for("dashboard"))
+
 
 @app.route("/my-assistant", methods = ["GET", "POST"])
 def ai_assistant():
@@ -282,6 +283,7 @@ def save_recipe():
 
     return redirect(url_for("read_recipes"))
 
+
 @app.route("/my-recipies")
 def read_recipes():
     user_recipes = db.execute("SELECT * FROM recipes")
@@ -298,6 +300,7 @@ def display_recipe(rec_id):
     print(type(user_recipe[0]))
     return render_template("recipies.html", recipes = user_recipes, selected_recipe = json.loads(user_recipe[0]["recipe_json"]), id=user_recipe[0]["id"])
 
+
 @app.route("/delete-recipe/<int:recipe_id>", methods=["POST"])
 def delete_recipe(recipe_id):
 
@@ -312,6 +315,7 @@ def logout():
     # Redirect to home page
     return redirect(url_for("home"))
 
+
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
     if request.method == "POST":
@@ -324,7 +328,6 @@ def contact():
         return redirect(url_for("dashboard"))
     else:
         return render_template("contact.html")
-
 
 
 
