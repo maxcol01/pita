@@ -1,3 +1,9 @@
+# TODO: clean the text so that the app description reflects the final version
+# TODO: make sure that we cannot access a route if not logged in
+# TODO: comment the code
+# TODO: clean the code
+# TODO: secure the inputs
+
 # ===== IMPORT THE MODULES =====
 from flask import Flask, render_template, redirect, request, url_for, session, flash, jsonify
 from  cs50 import SQL
