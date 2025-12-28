@@ -1,20 +1,21 @@
 {% extends "layout.html"%}
 
 {% block page_css %}
-  <link href="../static/css/recipies.css" rel="stylesheet"/>
+  <link href="/static/css/recipies.css" rel="stylesheet"/>
 {% endblock %}
 
 {% block content%}
-  <h1> This is your recipes {{session["name"]}} ! Enjoy !</h1>
-  <p> Select your previous recipes from the drop  menu below. If you want to remove a recipe from your history please feel free to do so.</p>
-  <div class="user-recipies-history">
-    <label for="user-recipe">Select the recipe you want to try again</label><br><br>
-    <select id="user-recipe" name="user-recipe">
-      {% for recipe in recipes %}
-        <option  value="{{recipe['id']}}">{{recipe["name"]}}</option>
-      {% endfor%}
-    </select>
-  </div>
+  <div class="recipes-container">
+    <h1> This is your recipes {{session["name"]}} ! Enjoy !</h1>
+    <p> Select your previous recipes from the drop menu below. If you want to remove a recipe from your history please feel free to do so.</p>
+    <div class="user-recipies-history">
+      <label for="user-recipe">Select the recipe you want to try again</label><br><br>
+      <select id="user-recipe" name="user-recipe">
+        {% for recipe in recipes %}
+          <option  value="{{recipe['id']}}">{{recipe["name"]}}</option>
+        {% endfor%}
+      </select>
+    </div>
 
     {% if selected_recipe %}
       <div class="ai-response-main-container">
@@ -77,6 +78,5 @@
         <form action="{{url_for('delete_recipe', recipe_id=id)}}" method="post"><button type="submit">Delete recipe</button></form>
       </div>
     {% endif %}
-
-
+  </div>
 {% endblock %}

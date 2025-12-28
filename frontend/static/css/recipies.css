@@ -1,7 +1,282 @@
+/*
+* P.I.T.A - Pantry Inventory Tracking Application
+* Recipes CSS - Styles for the user recipes page
+*/
+
+/* ===== MAIN CONTAINER ===== */
+.recipes-container {
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 20px;
+}
+
+/* ===== HEADER CONTENT ===== */
+.recipes-container h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--second-color);
+    font-size: 2rem;
+}
+
+.recipes-container p {
+    line-height: 1.6;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+/* ===== RECIPE SELECTION ===== */
 .user-recipies-history {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 50px;
+    margin: 30px auto;
+    max-width: 500px;
+}
+
+.user-recipies-history label {
+    font-size: 1.1rem;
+    color: var(--second-color);
+    margin-bottom: 5px;
+}
+
+.user-recipies-history select {
+    width: 100%;
+    max-width: 400px;
+    height: 2.5rem;
+    border-radius: 2rem;
+    border: 1px solid var(--main-color);
+    padding: 0 15px;
+    font-size: 1rem;
+    background-color: white;
+}
+
+.user-recipies-history select:focus {
+    outline: none;
+    border: 2px solid var(--main-color);
+}
+
+/* ===== RECIPE CONTAINER ===== */
+.ai-response-main-container {
+    margin: 30px auto;
+    max-width: 900px;
+}
+
+.ai-response-formatted-container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 30px;
+    margin-bottom: 20px;
+}
+
+/* Recipe Title and Description */
+.ai-recipe-title {
+    color: var(--second-color);
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.ai-recipe-description {
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #666;
+}
+
+/* Recipe Information */
+.ai-recipe-information {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 30px;
+}
+
+.ai-recipe-information ul {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 0;
+}
+
+.ai-recipe-information li {
+    margin: 10px;
+    font-size: 1.1rem;
+}
+
+/* Recipe Sections */
+.ai-recipe-ingredients,
+.ai-recipe-ingredients-to-buy,
+.ai-recipe-steps {
+    margin-bottom: 30px;
+}
+
+.ai-recipe-ingredients h2,
+.ai-recipe-ingredients-to-buy h2,
+.ai-recipe-steps h2 {
+    color: var(--main-color);
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--main-color);
+    padding-bottom: 10px;
+}
+
+.ai-recipe-ingredients ul,
+.ai-recipe-ingredients-to-buy ul {
+    margin-left: 20px;
+}
+
+.ai-recipe-ingredients li,
+.ai-recipe-ingredients-to-buy li {
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+.ai-recipe-ingredients-to-buy h4 {
+    color: var(--second-color);
+    font-style: italic;
+    text-align: center;
+}
+
+.ai-recipe-steps ol {
+    margin-left: 20px;
+}
+
+.ai-recipe-steps li {
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+/* Delete Recipe Button */
+.delete-recipe-btn {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.delete-recipe-btn button {
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    border-radius: 2rem;
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+.delete-recipe-btn button:hover {
+    opacity: 0.8;
+}
+
+/* ===== RESPONSIVE STYLES ===== */
+/* Tablet Styles (max-width: 768px) */
+@media screen and (max-width: 768px) {
+    .recipes-container h1 {
+        font-size: 1.8rem;
+    }
+
+    .recipes-container p {
+        font-size: 1rem;
+        max-width: 90%;
+    }
+
+    .user-recipies-history select {
+        max-width: 350px;
+    }
+
+    .ai-response-formatted-container {
+        padding: 20px;
+    }
+
+    .ai-recipe-title {
+        font-size: 1.7rem;
+    }
+
+    .ai-recipe-information ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .ai-recipe-information li {
+        margin: 5px 0;
+    }
+
+    .ai-recipe-ingredients h2,
+    .ai-recipe-ingredients-to-buy h2,
+    .ai-recipe-steps h2 {
+        font-size: 1.3rem;
+    }
+
+    .delete-recipe-btn button {
+        font-size: 1rem;
+    }
+}
+
+/* Mobile Styles (max-width: 480px) */
+@media screen and (max-width: 480px) {
+    .recipes-container {
+        padding: 10px;
+    }
+
+    .recipes-container h1 {
+        font-size: 1.5rem;
+    }
+
+    .recipes-container p {
+        font-size: 0.9rem;
+        max-width: 95%;
+    }
+
+    .user-recipies-history {
+        margin: 20px auto;
+    }
+
+    .user-recipies-history label {
+        font-size: 1rem;
+    }
+
+    .user-recipies-history select {
+        max-width: 280px;
+        height: 2.2rem;
+        font-size: 0.9rem;
+    }
+
+    .ai-response-formatted-container {
+        padding: 15px;
+    }
+
+    .ai-recipe-title {
+        font-size: 1.4rem;
+    }
+
+    .ai-recipe-description {
+        font-size: 0.9rem;
+    }
+
+    .ai-recipe-information li {
+        font-size: 0.9rem;
+    }
+
+    .ai-recipe-ingredients h2,
+    .ai-recipe-ingredients-to-buy h2,
+    .ai-recipe-steps h2 {
+        font-size: 1.2rem;
+    }
+
+    .ai-recipe-ingredients li,
+    .ai-recipe-ingredients-to-buy li,
+    .ai-recipe-steps li {
+        font-size: 0.9rem;
+    }
+
+    .delete-recipe-btn button {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
 }
