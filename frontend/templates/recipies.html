@@ -6,20 +6,77 @@
 
 {% block content%}
   <h1> This is your recipes {{session["name"]}} ! Enjoy !</h1>
-  <p> Select your previous recipes from the drop down menu below. If you want to remove a recipe from your history please feel free to do so.</p>
+  <p> Select your previous recipes from the drop  menu below. If you want to remove a recipe from your history please feel free to do so.</p>
   <div class="user-recipies-history">
-    <label for="recipe">Select the recipe you want to try again</label><br><br>
-    <select id="recipe" name="recipe">
+    <label for="user-recipe">Select the recipe you want to try again</label><br><br>
+    <select id="user-recipe" name="user-recipe">
       {% for recipe in recipes %}
-        <option id="selected-recipe-hist"  value="{{recipe['id']}}">{{recipe["name"]}}</option>
+        <option  value="{{recipe['id']}}">{{recipe["name"]}}</option>
       {% endfor%}
     </select>
-
-
-    <div class="delete-recipe-btn">
-      <form action="/delete-recipe" method="post"><button type="submit">Delete recipe</button></form>
-    </div>
   </div>
+
+    {% if selected_recipe %}
+      <div class="ai-response-main-container">
+        <div class="ai-response-formatted-container">
+              <!-- Title -->
+                <h1 class="ai-recipe-title">
+                    {{selected_recipe["title"]}}
+                </h1>
+                <p class="ai-recipe-description">
+                  {{selected_recipe["description"]}}
+                </p>
+              <!-- General information -->
+              <section class="ai-recipe-information">
+                <ul>
+                  <li><strong>Servings:</strong> {{selected_recipe["servings"]}}</li>
+                  <li><strong>Calories:</strong> {{selected_recipe["calories"]}} kcal</li>
+                  <li>
+                    <strong>Time:</strong>
+                    Prep {{selected_recipe["time"]["prep_minutes"]}} min - Cook {{selected_recipe["time"]["cook_minutes"]}} min - Total {{selected_recipe["time"]["total_minutes"]}} min
+                  </li>
+                </ul>
+              </section>
+              <!-- Ingredients -->
+              <section class="ai-recipe-ingredients">
+                <h2>Ingredients</h2>
+                  {% for ingredient in selected_recipe["ingredients_used"]%}
+                    <ul>
+                      <li>{{ingredient["quantity"]}} {{ingredient["name"]}}</li>
+                    </ul>
+                  {% endfor %}
+              </section>
+              <!-- Ingredients to buy -->
+              <section class="ai-recipe-ingredients-to-buy">
+                <h2>Ingredients to Buy</h2>
+                  {% if selected_recipe["ingredients_to_buy"] %}
+                      {% for ingredient in selected_recipe["ingredients_to_buy"]%}
+                        <ul>
+                          <li>{{ingredient["quantity"]}} {{ingredient["name"]}}</li>
+                        </ul>
+                      {% endfor %}
+                  {% else %}
+                    <h4> You already have everything you need !</h4>
+                  {% endif%}
+              </section>
+
+              <!-- Steps -->
+              <section class="ai-recipe-steps">
+                <h2>Instructions</h2>
+                <ol>
+                    {% for instruction in selected_recipe["steps"] %}
+                        <li>
+                            {{instruction}}
+                        </li>
+                    {% endfor %}
+                </ol>
+              </section>
+        </div>
+      </div>
+      <div class="delete-recipe-btn">
+        <form action="/delete-recipe" method="post"><button type="submit">Delete recipe</button></form>
+      </div>
+    {% endif %}
 
 
 {% endblock %}

@@ -280,13 +280,18 @@ def save_recipe():
 @app.route("/my-recipies")
 def read_recipes():
     user_recipes = db.execute("SELECT * FROM recipes")
-    return render_template("recipies.html", recipes = user_recipes)
+    return render_template("recipies.html", recipes = user_recipes, selected_recipe = [])
 
 
 
-@app.route("/dispay_recipe")
-def display_recipe():
-    pass
+@app.route("/display_recipe/<int:rec_id>")
+def display_recipe(rec_id):
+    user_recipe = db.execute("SELECT id, recipe_json  FROM recipes WHERE id = ? AND user_id = ?", rec_id, session["user_id"])
+    user_recipes = db.execute("SELECT * FROM recipes")
+    print(type(user_recipe))
+    print(user_recipe[0])
+    print(type(user_recipe[0]))
+    return render_template("recipies.html", recipes = user_recipes, selected_recipe = json.loads(user_recipe[0]["recipe_json"]))
 
 @app.route("/delete-recipe")
 def delete_recipe():
