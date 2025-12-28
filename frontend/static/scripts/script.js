@@ -17,8 +17,10 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 
     // display the recipe history (selection of one recipe)
-
-
+    const selectedRecipe = document.getElementById("selected-recipe-hist")
+    selectedRecipe.addEventListener("select", (e) => {
+        console.log(e)
+    })
     // get the current date to dynamically apply it to the page
     const date = new Date();
     const dateSpan = document.getElementById("date");
