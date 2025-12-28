@@ -1,4 +1,3 @@
-# TODO: clean the text so that the app description reflects the final version
 # TODO: make sure that we cannot access a route if not logged in
 # TODO: comment the code
 # TODO: clean the code
