@@ -74,7 +74,7 @@
         </div>
       </div>
       <div class="delete-recipe-btn">
-        <form action="/delete-recipe" method="post"><button type="submit">Delete recipe</button></form>
+        <form action="{{url_for('delete_recipe', recipe_id=id)}}" method="post"><button type="submit">Delete recipe</button></form>
       </div>
     {% endif %}
 

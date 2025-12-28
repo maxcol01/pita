@@ -280,7 +280,7 @@ def save_recipe():
 @app.route("/my-recipies")
 def read_recipes():
     user_recipes = db.execute("SELECT * FROM recipes")
-    return render_template("recipies.html", recipes = user_recipes, selected_recipe = [])
+    return render_template("recipies.html", recipes = user_recipes, selected_recipe = [], id=[])
 
 
 
@@ -291,15 +291,14 @@ def display_recipe(rec_id):
     print(type(user_recipe))
     print(user_recipe[0])
     print(type(user_recipe[0]))
-    return render_template("recipies.html", recipes = user_recipes, selected_recipe = json.loads(user_recipe[0]["recipe_json"]))
+    return render_template("recipies.html", recipes = user_recipes, selected_recipe = json.loads(user_recipe[0]["recipe_json"]), id=user_recipe[0]["id"])
 
-@app.route("/delete-recipe")
-def delete_recipe():
-    if request.method == "POST":
-        recipe_id = request.form.get("id")
-        db.execute("DELETE FROM recipes WHERE id = ? AND user_id = ?", recipe_id, session["user_id"])
-        return redirect(url_for("read_recipes"))
-    return None
+@app.route("/delete-recipe/<int:recipe_id>", methods=["POST"])
+def delete_recipe(recipe_id):
+
+    db.execute("DELETE FROM recipes WHERE id = ? AND user_id = ?", recipe_id, session["user_id"])
+    return redirect(url_for("read_recipes"))
+
 
 @app.route("/logout")
 def logout():
