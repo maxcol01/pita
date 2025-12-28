@@ -39,7 +39,8 @@ def generate_response(formated_ingredients):
             3. Specify exact quantities for ALL ingredients.
             4. Keep the recipe simple and realistic.
             5. The recipe should be suitable for everyday home cooking.
-            6. Output MUST be valid JSON and NOTHING ELSE (no explanations, no markdown).
+            6. You can propose substitution if one possess ingredients that can fit into a real recipe. The idea again is to reduce useless purchase or food waste. As an example, if you want to propose a recipe with pasta BUT rice is available and can match with the rest of the recipe then propose rice instead of pasta in order to avoid buying pasta.
+            7. Output MUST be valid JSON and NOTHING ELSE (no explanations, no markdown).
 
             ### Example of JSON Output Format:
             {{

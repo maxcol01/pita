@@ -1,3 +1,9 @@
+/*
+* P.I.T.A - Pantry Inventory Tracking Application
+* Script JS - Dynamism of the app
+*/
+
+
 document.addEventListener("DOMContentLoaded", () => {
 
     // check if I get a response (for the loader)
