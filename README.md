@@ -138,6 +138,9 @@ While the current version provides a solid foundation, several enhancements coul
 - Expiration date notifications
 - Social sharing of recipes
 - Integration with online grocery services
+- Improve the database for production (e.g., use Postgres instead of SQLite)
+- Improve the frontend using maybe a JS framework (e.g., React.js)
+- etc.
 
 ### AI Usage - in accordance with CS50 requirements
 This project was designed and implemented entirely by me, in full accordance with CS50’s policy on the appropriate use of AI tools. 
