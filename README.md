@@ -139,6 +139,15 @@ While the current version provides a solid foundation, several enhancements coul
 - Social sharing of recipes
 - Integration with online grocery services
 
+### AI Usage - in accordance with CS50 requirements
+This project was designed and implemented entirely by me, in full accordance with CS50’s policy on the appropriate use of AI tools. 
+
+I used ChatGPT as a support resource for discussing design ideas, clarifying concepts, and debugging specific issues, in a manner comparable to consulting documentation or seeking high-level guidance. 
+
+The entire project was developed inside JetBrain - PyCharm IDE, so I also used Junie (built-in AI assistant) to assist with extending and refining CSS styling to improve visual consistency across the application.
+
+At all times, I retained full understanding and control over the codebase. All architectural choices, core logic, and implementation decisions were my own, and no AI-generated content was used without being reviewed, understood, and, where necessary, adapted by me. The AI tools were used strictly as aids to learning and refinement, not to generate solutions beyond my own comprehension or to replace my own work.
+
 ## Conclusion
 
 P.I.T.A represents a practical solution to common kitchen management challenges that I myself have been faced daily. By combining inventory tracking with AI-powered recipe suggestions, the application will hopefully help users make the most of their available ingredients, reduce food waste, and discover new culinary possibilities. The project demonstrates the effective use of web technologies and AI integration to create a useful, user-friendly application.
