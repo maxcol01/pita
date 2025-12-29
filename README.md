@@ -136,3 +136,7 @@ While the current version provides a solid foundation, several enhancements coul
 ## Conclusion
 
 P.I.T.A represents a practical solution to common kitchen management challenges that I myself have been faced daily. By combining inventory tracking with AI-powered recipe suggestions, the application will hopefully help users make the most of their available ingredients, reduce food waste, and discover new culinary possibilities. The project demonstrates the effective use of web technologies and AI integration to create a useful, user-friendly application.
+
+## URL of the DEMO video
+
+URL: 

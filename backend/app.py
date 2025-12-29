@@ -197,6 +197,9 @@ def register():
 
 @app.route("/edit-item/<int:item_id>", methods=["GET","POST"])
 def edit_item(item_id):
+    # Check if user is logged in
+    if not session.get("user_id"):
+        return redirect(url_for("login"))
     if request.method == "POST":
         item_name = request.form.get("name")
         item_category = request.form.get("category")
@@ -215,6 +218,9 @@ def edit_item(item_id):
 
 @app.route("/add-item", methods = ["POST", "GET"])
 def add_item():
+    # Check if user is logged in
+    if not session.get("user_id"):
+        return redirect(url_for("login"))
     if request.method == "POST":
         item_name = request.form.get("name")
         item_category = request.form.get("category")
@@ -231,19 +237,27 @@ def add_item():
 
 @app.route("/delete-item/<int:item_id>")
 def delete_item(item_id):
+    # Check if user is logged in
+    if not session.get("user_id"):
+        return redirect(url_for("login"))
     db.execute("DELETE FROM pantry_items WHERE item_id = ? AND user_id = ?", item_id, session["user_id"])
     return redirect(url_for("dashboard"))
 
 
 @app.route("/my-assistant", methods = ["GET", "POST"])
 def ai_assistant():
+    # Check if user is logged in
+    if not session.get("user_id"):
+        return redirect(url_for("login"))
     recipe = session.get("recipe", None)
     return render_template("assistant.html", recipe = recipe)
 
 
 @app.route("/my-assistant/generate")
 def generate_recipes():
-
+    # Check if user is logged in
+    if not session.get("user_id"):
+        return redirect(url_for("login"))
     #Extract the ingredients of the user from the db
     ingredients = db.execute("SELECT * FROM pantry_items WHERE user_id = ?", session["user_id"])
 
@@ -264,6 +278,9 @@ def generate_recipes():
 
 @app.route("/save-recipe")
 def save_recipe():
+    # Check if user is logged in
+    if not session.get("user_id"):
+        return redirect(url_for("login"))
     # get the recipe from the session
     recipe = session.get("recipe", None)
 
@@ -285,6 +302,9 @@ def save_recipe():
 
 @app.route("/my-recipies")
 def read_recipes():
+    # Check if user is logged in
+    if not session.get("user_id"):
+        return redirect(url_for("login"))
     user_recipes = db.execute("SELECT * FROM recipes")
     return render_template("recipies.html", recipes = user_recipes, selected_recipe = [], id=[])
 
@@ -292,6 +312,9 @@ def read_recipes():
 
 @app.route("/display_recipe/<int:rec_id>")
 def display_recipe(rec_id):
+    # Check if user is logged in
+    if not session.get("user_id"):
+        return redirect(url_for("login"))
     user_recipe = db.execute("SELECT id, recipe_json  FROM recipes WHERE id = ? AND user_id = ?", rec_id, session["user_id"])
     user_recipes = db.execute("SELECT * FROM recipes")
     print(type(user_recipe))
@@ -302,7 +325,9 @@ def display_recipe(rec_id):
 
 @app.route("/delete-recipe/<int:recipe_id>", methods=["POST"])
 def delete_recipe(recipe_id):
-
+    # Check if user is logged in
+    if not session.get("user_id"):
+        return redirect(url_for("login"))
     db.execute("DELETE FROM recipes WHERE id = ? AND user_id = ?", recipe_id, session["user_id"])
     return redirect(url_for("read_recipes"))
 
