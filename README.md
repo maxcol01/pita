@@ -1,11 +1,17 @@
 # P.I.T.A - Pantry Inventory Tracking Application
 
+## URL of the DEMO video
+
+URL: 
+
 ## Project Overview
+
+### Description:
 
 P.I.T.A (Pantry Inventory Tracking Application) is a web-based application designed to help users manage their food inventory, reduce food waste, and discover recipes based on available ingredients. The application allows users to track items in their pantry, freezer, and refrigerator, monitor expiration dates, and generate recipe suggestions using AI.
 
 
-## Technologies Used
+### Technologies Used
 
 - **Backend**: 
   - Python with Flask framework
@@ -137,6 +143,3 @@ While the current version provides a solid foundation, several enhancements coul
 
 P.I.T.A represents a practical solution to common kitchen management challenges that I myself have been faced daily. By combining inventory tracking with AI-powered recipe suggestions, the application will hopefully help users make the most of their available ingredients, reduce food waste, and discover new culinary possibilities. The project demonstrates the effective use of web technologies and AI integration to create a useful, user-friendly application.
 
-## URL of the DEMO video
-
-URL: 
