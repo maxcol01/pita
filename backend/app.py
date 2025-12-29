@@ -97,7 +97,6 @@ def dashboard():
     if not session.get("user_id"):
         return redirect(url_for("login"))
     user_items = db.execute("SELECT * FROM pantry_items WHERE user_id = ?", session["user_id"])
-    print(user_items)
     return render_template("dashboard.html", name=session["name"], user_items=user_items)
 
 
@@ -323,7 +322,10 @@ def contact():
         user_email = request.form.get("email")
         subject = request.form.get("subject")
         message_content = request.form.get("message")
+
+        # use the function from the module "mail"
         send_contact_email(user_name, user_email, subject, message_content)
+
         # redirect to the dashboard page with a success parameter
         return redirect(url_for("dashboard"))
     else:
