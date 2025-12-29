@@ -1,4 +1,3 @@
-# TODO: make sure that we cannot access a route if not logged in
 # TODO: comment the code
 # TODO: clean the code
 # TODO: secure the inputs
