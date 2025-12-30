@@ -10,6 +10,8 @@
 
 {% block content %}
     <div class="dashboard-title"> My items:</div>
+
+    <!-- Main container to access what we have in our pantry (the pantry is made as a table)-->
     <div class="dashboard-main-container">
         <section class="display-storage">
             <table>
@@ -45,6 +47,8 @@
                 </tbody>
             </table>
         </section>
+
+         <!-- Button container to add element-->
         <div class="add-item-btn-container">
             <div class="add-item-btn">
                 <form action="/add-item" method="get"><button type="submit">add element</button></form>

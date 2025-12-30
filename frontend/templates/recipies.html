@@ -6,6 +6,7 @@
 
 {% block content%}
   <div class="recipes-container">
+      <!-- This part will appear on the page by default -->
     <h1> This is your recipes {{session["name"]}} ! Enjoy !</h1>
     <p> Select your previous recipes from the drop menu below. If you want to remove a recipe from your history please feel free to do so.</p>
     <div class="user-recipies-history">
@@ -18,6 +19,7 @@
       </select>
     </div>
 
+      <!-- This part will appear on the page only if we have selected a recipe -->
     {% if selected_recipe %}
       <div class="ai-response-main-container">
         <div class="ai-response-formatted-container">
