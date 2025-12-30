@@ -37,7 +37,8 @@ The project follows a clear separation between backend and frontend components:
   - **`ai_llm_management.py`**: Manages interactions with the OpenAI API for recipe generation.
 - **`mail/`**: Contains email functionality.
   - **`mail_management.py`**: Handles sending contact form emails.
-- **`login/`**: Contains authentication-related functionality.
+- **`pantry/`**: Contains information for the pantry.
+  - **`pantry.py`**: Categories variables for the items.
 - **`pantry.sqlite`**: SQLite database storing user information, pantry items, and saved recipes.
 
 ### Frontend (`/frontend`)
