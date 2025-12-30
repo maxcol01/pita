@@ -3,6 +3,26 @@
 * Item Definition CSS - Styles for the item add/edit page
 */
 
+/* ===== FLASH MESSAGE ===== */
+.flash-message {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.flash-message.error {
+  background-color: #ffe5e5;
+  color: #a40000;
+}
+
+.flash-message.success {
+  background-color: #e5ffe5;
+  color: #006400;
+}
+
 /* ===== TITLE CONTAINER ===== */
 .item-title {
     text-align: center;
@@ -78,20 +98,20 @@ button[type="submit"]:hover {
     .item-title {
         font-size: 1.5rem;
     }
-    
+
     .item-definition-main-container {
         padding: 20px;
         max-width: 90%;
     }
-    
+
     label {
         font-size: 1rem;
     }
-    
+
     input, select {
         height: 2.2rem;
     }
-    
+
     button[type="submit"] {
         font-size: 1rem;
         padding: 8px 25px;
@@ -103,21 +123,21 @@ button[type="submit"]:hover {
         font-size: 1.3rem;
         max-width: 95%;
     }
-    
+
     .item-definition-main-container {
         padding: 15px;
         max-width: 95%;
     }
-    
+
     label {
         font-size: 0.9rem;
     }
-    
+
     input, select {
         height: 2rem;
         margin-bottom: 15px;
     }
-    
+
     button[type="submit"] {
         font-size: 0.9rem;
         padding: 8px 20px;

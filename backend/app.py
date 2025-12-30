@@ -199,6 +199,15 @@ def edit_item(item_id):
     # Check if user is logged in
     if not session.get("user_id"):
         return redirect(url_for("login"))
+
+    # Get the item info for rendering the form
+    items_info = db.execute("SELECT * FROM pantry_items WHERE item_id = ? AND user_id = ?", item_id, session["user_id"])
+
+    # Check if the item exists and belongs to the user
+    if not items_info:
+        flash(message="Item not found", category="error")
+        return redirect(url_for("dashboard"))
+
     if request.method == "POST":
         item_name = request.form.get("name")
         item_category = request.form.get("category")
@@ -208,11 +217,43 @@ def edit_item(item_id):
         item_location = request.form.get("location")
         today = datetime.datetime.now()
 
-        db.execute("UPDATE pantry_items SET name = ?, category = ?, quantity = ?, unit = ?, expiration_date = ?, location = ?, updated_at = ? WHERE item_id = ? AND user_id = ?", item_name, item_category, item_quantity, item_unit, item_exp_date, item_location, today, item_id, session["user_id"])
+        # Validate the required fields
+        if not item_name:
+            flash(message="Item name is required", category="error")
+            return render_template("item_definition.html", categories=categories, items_info=items_info)
+
+        if not item_category:
+            flash(message="Category is required", category="error")
+            return render_template("item_definition.html", categories=categories, items_info=items_info)
+
+        if not item_quantity:
+            flash(message="Quantity is required", category="error")
+            return render_template("item_definition.html", categories=categories, items_info=items_info)
+
+        # Validate that quantity is a number
+        try:
+            float(item_quantity)
+        except ValueError:
+            flash(message="Quantity must be a number", category="error")
+            return render_template("item_definition.html", categories=categories, items_info=items_info)
+
+        if not item_unit:
+            flash(message="Unit is required", category="error")
+            return render_template("item_definition.html", categories=categories, items_info=items_info)
+
+        if not item_location:
+            flash(message="Location is required", category="error")
+            return render_template("item_definition.html", categories=categories, items_info=items_info)
+
+        # Update the database
+        db.execute("UPDATE pantry_items SET name = ?, category = ?, quantity = ?, unit = ?, expiration_date = ?, location = ?, updated_at = ? WHERE item_id = ? AND user_id = ?", 
+                  item_name, item_category, item_quantity, item_unit, item_exp_date, item_location, today, item_id, session["user_id"])
+
+        # Success message
+        flash(message="Item updated successfully", category="success")
         return redirect(url_for("dashboard"))
     else:
-        items_info = db.execute("SELECT * FROM pantry_items WHERE item_id = ? AND user_id = ?", item_id, session["user_id"])
-        return render_template("item_definition.html", categories=categories, items_info = items_info)
+        return render_template("item_definition.html", categories=categories, items_info=items_info)
 
 
 @app.route("/add-item", methods = ["POST", "GET"])
@@ -220,6 +261,7 @@ def add_item():
     # Check if user is logged in
     if not session.get("user_id"):
         return redirect(url_for("login"))
+
     if request.method == "POST":
         item_name = request.form.get("name")
         item_category = request.form.get("category")
@@ -228,10 +270,43 @@ def add_item():
         item_exp_date = request.form.get("exp-date")
         item_location = request.form.get("location")
 
-        db.execute("INSERT INTO pantry_items (user_id, name, category, quantity, unit, expiration_date, location) VALUES (?, ?, ?, ?, ?, ?, ?)", session["user_id"], item_name, item_category, item_quantity, item_unit, item_exp_date, item_location)
+        # Validate the required fields
+        if not item_name:
+            flash(message="Item name is required", category="error")
+            return render_template("item_definition.html", categories=categories, items_info=[])
+
+        if not item_category:
+            flash(message="Category is required", category="error")
+            return render_template("item_definition.html", categories=categories, items_info=[])
+
+        if not item_quantity:
+            flash(message="Quantity is required", category="error")
+            return render_template("item_definition.html", categories=categories, items_info=[])
+
+        # Validate that quantity is a number
+        try:
+            float(item_quantity)
+        except ValueError:
+            flash(message="Quantity must be a number", category="error")
+            return render_template("item_definition.html", categories=categories, items_info=[])
+
+        if not item_unit:
+            flash(message="Unit is required", category="error")
+            return render_template("item_definition.html", categories=categories, items_info=[])
+
+        if not item_location:
+            flash(message="Location is required", category="error")
+            return render_template("item_definition.html", categories=categories, items_info=[])
+
+        # Insert into database
+        db.execute("INSERT INTO pantry_items (user_id, name, category, quantity, unit, expiration_date, location) VALUES (?, ?, ?, ?, ?, ?, ?)", 
+                  session["user_id"], item_name, item_category, item_quantity, item_unit, item_exp_date, item_location)
+
+        # Success message
+        flash(message="Item added successfully", category="success")
         return redirect(url_for("dashboard"))
     else:
-        return render_template("item_definition.html", categories=categories, items_info = [])
+        return render_template("item_definition.html", categories=categories, items_info=[])
 
 
 @app.route("/delete-item/<int:item_id>")
@@ -248,6 +323,8 @@ def ai_assistant():
     # Check if user is logged in
     if not session.get("user_id"):
         return redirect(url_for("login"))
+
+    # the previously generated recipe is stored in the session (so we need to retrieve it or return None)
     recipe = session.get("recipe", None)
     return render_template("assistant.html", recipe = recipe)
 
@@ -260,6 +337,8 @@ def generate_recipes():
     #Extract the ingredients of the user from the db
     ingredients = db.execute("SELECT * FROM pantry_items WHERE user_id = ?", session["user_id"])
 
+    if not ingredients:
+        ingredients = []
     # format the ingredients for LLM friendly input
     formated_ingredients = format_ingredients_for_prompt(ingredients)
 
@@ -304,7 +383,8 @@ def read_recipes():
     # Check if user is logged in
     if not session.get("user_id"):
         return redirect(url_for("login"))
-    user_recipes = db.execute("SELECT * FROM recipes")
+    user_recipes = db.execute("SELECT * FROM recipes WHERE user_id = ?", session["user_id"])
+    print(session["user_id"])
     return render_template("recipies.html", recipes = user_recipes, selected_recipe = [], id=[])
 
 
@@ -315,7 +395,7 @@ def display_recipe(rec_id):
     if not session.get("user_id"):
         return redirect(url_for("login"))
     user_recipe = db.execute("SELECT id, recipe_json  FROM recipes WHERE id = ? AND user_id = ?", rec_id, session["user_id"])
-    user_recipes = db.execute("SELECT * FROM recipes")
+    user_recipes = db.execute("SELECT * FROM recipes WHERE user_id = ?", session["user_id"])
     print(type(user_recipe))
     print(user_recipe[0])
     print(type(user_recipe[0]))
