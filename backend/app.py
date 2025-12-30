@@ -1,6 +1,3 @@
-# TODO: comment the code
-# TODO: clean the code
-# TODO: secure the inputs
 
 # ===== IMPORT THE MODULES =====
 from flask import Flask, render_template, redirect, request, url_for, session, flash, jsonify
@@ -95,7 +92,10 @@ def dashboard():
     # Check if user is logged in
     if not session.get("user_id"):
         return redirect(url_for("login"))
+
+    #Grab the user items to populate the dashboard
     user_items = db.execute("SELECT * FROM pantry_items WHERE user_id = ?", session["user_id"])
+
     return render_template("dashboard.html", name=session["name"], user_items=user_items)
 
 
@@ -383,8 +383,10 @@ def read_recipes():
     # Check if user is logged in
     if not session.get("user_id"):
         return redirect(url_for("login"))
+
+    # get the user recipes
     user_recipes = db.execute("SELECT * FROM recipes WHERE user_id = ?", session["user_id"])
-    print(session["user_id"])
+
     return render_template("recipies.html", recipes = user_recipes, selected_recipe = [], id=[])
 
 
@@ -394,11 +396,13 @@ def display_recipe(rec_id):
     # Check if user is logged in
     if not session.get("user_id"):
         return redirect(url_for("login"))
+
+    # Get the information (id and recipe infor) of a selected recipe for the current user
     user_recipe = db.execute("SELECT id, recipe_json  FROM recipes WHERE id = ? AND user_id = ?", rec_id, session["user_id"])
+
+    # Get all the current user recipes (to populate the select html tag)
     user_recipes = db.execute("SELECT * FROM recipes WHERE user_id = ?", session["user_id"])
-    print(type(user_recipe))
-    print(user_recipe[0])
-    print(type(user_recipe[0]))
+
     return render_template("recipies.html", recipes = user_recipes, selected_recipe = json.loads(user_recipe[0]["recipe_json"]), id=user_recipe[0]["id"])
 
 
@@ -407,7 +411,10 @@ def delete_recipe(recipe_id):
     # Check if user is logged in
     if not session.get("user_id"):
         return redirect(url_for("login"))
+
+    # delete the recipe the user selected
     db.execute("DELETE FROM recipes WHERE id = ? AND user_id = ?", recipe_id, session["user_id"])
+
     return redirect(url_for("read_recipes"))
 
 
