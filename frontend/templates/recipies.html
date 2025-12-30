@@ -11,7 +11,7 @@
     <div class="user-recipies-history">
       <label for="user-recipe">Select the recipe you want to try again</label><br><br>
       <select id="user-recipe" name="user-recipe">
-          <option value="" selected disabled></option>
+          <option value="" selected disabled>Select your recipe</option>
         {% for recipe in recipes %}
           <option  value="{{recipe['id']}}">{{recipe["name"]}}</option>
         {% endfor%}
