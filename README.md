@@ -2,7 +2,7 @@
 
 ## URL of the DEMO video
 
-URL: 
+URL: https://youtu.be/QS12v3acIyo
 
 ## Project Overview
 
