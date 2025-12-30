@@ -151,6 +151,11 @@ The entire project was developed inside `JetBrain - PyCharm IDE`, so I also used
 
 At all times, I retained full understanding and control over the codebase. All architectural choices, core logic, and implementation decisions were my own, and no AI-generated content was used without being reviewed, understood, and, where necessary, adapted by me. The AI tools were used strictly as aids to learning and refinement, not to generate solutions beyond my own comprehension or to replace my own work.
 
+## TO DO
+
+- make the app modular (reduce the size of `app.py`)
+- check for potential side cases
+
 ## Conclusion
 
 P.I.T.A represents a practical solution to common kitchen management challenges that I myself have been faced daily. By combining inventory tracking with AI-powered recipe suggestions, the application will hopefully help users make the most of their available ingredients, reduce food waste, and discover new culinary possibilities. The project demonstrates the effective use of web technologies and AI integration to create a useful, user-friendly application.
