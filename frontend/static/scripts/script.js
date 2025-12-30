@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (selectedRecipe){
         selectedRecipe.addEventListener("change", (e) => {
             const idRecipe = e.target.value;
+            // redirect to the display_recipe page with the id of the selected recipe
             window.location.href = `/display_recipe/${idRecipe}`;
         })
     }

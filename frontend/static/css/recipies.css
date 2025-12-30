@@ -160,7 +160,7 @@
 }
 
 .delete-recipe-btn button {
-    background-color: #d9534f;
+    background-color: #d9534f; /* delete button in red to difference it from the others*/
     color: white;
     border: none;
     border-radius: 2rem;
