@@ -14,6 +14,7 @@ import json
 
 from mail.mail_management import send_contact_email
 from ai.ai_llm_management import generate_response, format_ingredients_for_prompt
+from pantry.pantry import generate_categories
 # check if the .env files exists
 load_dotenv()
 
@@ -47,21 +48,7 @@ Session(app)
 
 # ===== CATEGORIES FOR THE ITEMS =====
 
-categories = [
-    "Vegetables",
-    "Fruits",
-    "Meat & Fish",
-    "Dairy & Alternatives",
-    "Bakery & Grains",
-    "Canned & Jarred",
-    "Frozen Foods",
-    "Condiments & Sauces",
-    "Spices & Seasonings",
-    "Snacks & Sweets",
-    "Nuts, Seeds & Spreads",
-    "Beverages",
-    "Other"
-]
+categories = generate_categories()
 
 # ===== PROTECTION OF THE APP IN THE HEADER =====
 @app.after_request
